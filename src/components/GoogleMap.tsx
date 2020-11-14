@@ -3,6 +3,8 @@ import GoogleMapReact from 'google-map-react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducers/rootReducer';
 
+import CurrentIcon from './CurrentIcon';
+
 interface Location {
   lat: number,
   lng: number
@@ -37,6 +39,7 @@ const MyGoogleMap = () => {
         defaultZoom={defaultMapSetting.zoom}
         center={newLocation}
       >
+        <CurrentIcon lat={newLocation.lat} lng={newLocation.lng} />
       </GoogleMapReact>
     </div>
   )
