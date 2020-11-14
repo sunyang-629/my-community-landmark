@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import GoogleMapReact from 'google-map-react';
+
+// const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 interface MapSetting {
   center: {
@@ -11,7 +13,7 @@ interface MapSetting {
 
 const GoogleMap = () => {
 
-  const defualMapSetting:MapSetting = {
+  const defaultMapSetting:MapSetting = {
     center: {
       lat: -27.4703887,
       lng: 153.0249142,
@@ -23,8 +25,8 @@ const GoogleMap = () => {
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: 'AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU' }}
-        defaultCenter={defualMapSetting.center}
-        defaultZoom={defualMapSetting.zoom}
+        defaultCenter={defaultMapSetting.center}
+        defaultZoom={defaultMapSetting.zoom}
       >
         {/* <AnyReactComponent
           lat={59.955413}
