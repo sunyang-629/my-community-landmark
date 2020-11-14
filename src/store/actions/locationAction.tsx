@@ -5,7 +5,7 @@ type GetCurrentLocationAction = {
   readonly type: ActionTypes.getCurrentLocation,
   readonly payload: {
     lat: number,
-    lon: number
+    lng: number
   }
 }
 
@@ -17,18 +17,18 @@ interface GetCurrentLocationErrorAction {
 }
 
 
-export const getCurrentLocation = () => (dispatch: Dispatch<GetCurrentLocationAction | GetCurrentLocationError>) => {
+export const getCurrentLocation = () => (dispatch: Dispatch<GetCurrentLocationAction | GetCurrentLocationErrorAction>) => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       position => {
         const lat: number = position.coords.latitude;
-        const lon: number = position.coords.longitude;
-        console.log('position:',lat,lon);
+        const lng: number = position.coords.longitude;
+        console.log('position:',lat,lng);
         return dispatch({
           type: ActionTypes.getCurrentLocation,
           payload: {
             lat,
-            lon
+            lng
           }
         })
       },

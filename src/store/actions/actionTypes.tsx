@@ -8,7 +8,7 @@ export enum ActionTypes  {
 
 export interface GetCurrentLocation {
   type: ActionTypes.getCurrentLocation;
-  payload: { lat: number, lon: number }
+  payload: { lat: number, lng: number }
 }
 
 export interface GetCurrentLocationError {

@@ -7,8 +7,8 @@ import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const location = useSelector((state:RootState) => state.location);
-  console.log('navbar:',location);
+  // const location = useSelector((state:RootState) => state.location);
+  // console.log('navbar:',location);
 
   const handleClick = () => {
     dispatch(getCurrentLocation())
@@ -19,14 +19,8 @@ const Navbar = () => {
       <IconButton onClick={handleClick}>
         <PersonPinCircleIcon />
       </IconButton>
-      <span>     {location.lat}    {location.lon}</span>
     </div>
   )
 }
-
-// const mapDispatchToProps = dispatch => {
-//   return 
-// }
-
 
 export default Navbar

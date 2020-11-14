@@ -1,25 +1,33 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducers/rootReducer';
 
-// const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
+interface Location {
+  lat: number,
+  lng: number
+}
 interface MapSetting {
-  center: {
-    lat: number,
-    lng: number
-  },
+  center: Location
   zoom: number
 }
 
-const GoogleMap = () => {
+const MyGoogleMap = () => {
 
-  const defaultMapSetting:MapSetting = {
+  let location: Location = {
+    lat: -27.4703887,
+    lng: 153.0249142,
+  };
+
+  const defaultMapSetting: MapSetting = {
     center: {
-      lat: -27.4703887,
-      lng: 153.0249142,
+      lat: location.lat,
+      lng: location.lng
     },
     zoom: 15
   }
+
+  const newLocation = useSelector((state:RootState) => state.location);
 
   return (
     <div style={{ height: '100vh', width: '100%' }}>
@@ -27,16 +35,11 @@ const GoogleMap = () => {
         bootstrapURLKeys={{ key: 'AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU' }}
         defaultCenter={defaultMapSetting.center}
         defaultZoom={defaultMapSetting.zoom}
+        center={newLocation}
       >
-        {/* <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="My Marker"
-        /> */}
       </GoogleMapReact>
     </div>
   )
 }
 
-export default GoogleMap
-
+export default MyGoogleMap
