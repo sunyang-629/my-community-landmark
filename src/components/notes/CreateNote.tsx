@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import { createProject } from '../../store/actions/projectActions';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers/rootReducer';
 import { Redirect } from 'react-router-dom'
 
 const CreateNote = () => {
@@ -9,6 +10,7 @@ const CreateNote = () => {
     note: '',
   });
   // const auth = useSelector(state => state.firebase.auth);
+  const location = useSelector((state: RootState) => state.location);
 
   // const dispatch = useDispatch()
 
@@ -29,10 +31,10 @@ const CreateNote = () => {
           <h5 className="grey-text text-darken-3">Create New Note</h5>
           <div className="input-field">
             <label htmlFor="note">Note</label>
-            <input type="text" id="note" onChange={handleChange} />
+            <input type="text" id="note" onChange={handleChange} required />
           </div>
           <div className="input-field">
-            <label htmlFor="location">Location</label>
+            <label htmlFor="location">{location.lat} {location.lng}</label>
             <input type="text" id="location" disabled/>
           </div>
           <div className="input-field">
