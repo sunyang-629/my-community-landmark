@@ -1,7 +1,9 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import GoogleMapReact from 'google-map-react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/reducers/rootReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers/rootReducer';
+import { getCurrentLocation } from '../../store/actions/locationAction';
+
 
 import CurrentIcon from './CurrentIcon';
 
@@ -16,10 +18,8 @@ interface MapSetting {
 
 const MyGoogleMap = () => {
 
-  let location: Location = {
-    lat: -27.4703887,
-    lng: 153.0249142,
-  };
+  const location = useSelector((state: RootState) => state.location);
+  localStorage.setItem('location', JSON.stringify(location));
 
   const defaultMapSetting: MapSetting = {
     center: {
@@ -29,17 +29,15 @@ const MyGoogleMap = () => {
     zoom: 15
   }
 
-  const newLocation = useSelector((state:RootState) => state.location);
-
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
+    <div style={{ height: '90vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: 'AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU' }}
         defaultCenter={defaultMapSetting.center}
         defaultZoom={defaultMapSetting.zoom}
-        center={newLocation}
+        center={location}
       >
-        <CurrentIcon lat={newLocation.lat} lng={newLocation.lng} />
+        <CurrentIcon lat={location.lat} lng={location.lng} />
       </GoogleMapReact>
     </div>
   )

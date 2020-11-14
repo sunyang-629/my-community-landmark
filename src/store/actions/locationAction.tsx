@@ -1,5 +1,5 @@
-import { ActionTypes, GetCurrentLocationError } from './actionTypes';
-import { Dispatch, Action } from "redux"
+import { ActionTypes } from './actionTypes';
+import { Dispatch } from "redux"
 
 type GetCurrentLocationAction = {
   readonly type: ActionTypes.getCurrentLocation,
