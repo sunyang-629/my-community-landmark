@@ -34,5 +34,9 @@ export interface CreateNote {
   type: ActionTypes.createNote;
   payload:{note:note}
 }
+export interface CreateNoteError {
+  type: ActionTypes.createNoteError;
+  payload:{err:string}
+}
 
-export type NoteAction = CreateNote;
+export type NoteAction = CreateNote | CreateNoteError;
