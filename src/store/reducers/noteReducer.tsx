@@ -18,6 +18,10 @@ const initState = {
   ]
 }
 
-export const noteReducer = (state = initState, action:NoteAction) => {
+export const noteReducer = (state = initState, action: NoteAction) => {
+  switch (action.type) {
+    case ActionTypes.createNote:
+      console.log('created note',action.payload);
+  }
   return state;
 }

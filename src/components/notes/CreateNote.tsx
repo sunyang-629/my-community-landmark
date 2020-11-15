@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 // import { createProject } from '../../store/actions/projectActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { createNote } from '../../store/actions/noteAction';
 import { RootState } from '../../store/reducers/rootReducer';
 import { Redirect } from 'react-router-dom'
 
 const CreateNote = () => {
   
-  const [note, setNote] = useState({
-    note: '',
-  });
-  // const auth = useSelector(state => state.firebase.auth);
   const location = useSelector((state: RootState) => state.location);
 
-  // const dispatch = useDispatch()
+  const [note, setNote] = useState({
+    note: '',
+    location: {
+      lat: location.lat,
+      lng: location.lng,
+    },
+    author:'test-user'
+  });
+  // const auth = useSelector(state => state.firebase.auth);
+
+
+  const dispatch = useDispatch();
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     e.target && setNote({ ...note, [e.target.id]: e.target.value });
@@ -20,8 +28,7 @@ const CreateNote = () => {
 
   const handleSubmit = (e:React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    console.log('object');
-    // dispatch(createProject(project));
+    dispatch(createNote(note));
     // props.history.push('/');
   }
 

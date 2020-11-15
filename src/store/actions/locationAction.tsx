@@ -9,7 +9,7 @@ type GetCurrentLocationAction = {
   }
 }
 
-interface GetCurrentLocationErrorAction {
+type GetCurrentLocationErrorAction = {
   readonly type: ActionTypes.getCurrentLocationError,
   readonly payload: {
     error:string
@@ -23,7 +23,6 @@ export const getCurrentLocation = () => (dispatch: Dispatch<GetCurrentLocationAc
       position => {
         const lat: number = position.coords.latitude;
         const lng: number = position.coords.longitude;
-        console.log('position:',lat,lng);
         return dispatch({
           type: ActionTypes.getCurrentLocation,
           payload: {

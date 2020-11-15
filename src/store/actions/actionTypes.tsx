@@ -21,8 +21,8 @@ export interface GetCurrentLocationError {
 
 export type LocationAction = GetCurrentLocation | GetCurrentLocationError
 
-interface note {
-  id: string,
+export interface note {
+  id?: string,
   note: string,
   author: string,
   location: {
