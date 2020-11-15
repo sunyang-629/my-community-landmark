@@ -3,6 +3,11 @@ import GoogleMapReact from 'google-map-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers/rootReducer';
 import { getCurrentLocation } from '../../store/actions/locationAction';
+import { firestoreConnect } from 'react-redux-firebase';
+// import { rootReducer } from '../../store/reducers/rootReducer';
+import { note } from '../../store/reducers/noteReducer';
+import { compose } from 'redux';
+import { connect } from 'react-redux'
 
 
 import CurrentIcon from './CurrentIcon';
@@ -17,11 +22,11 @@ interface MapSetting {
   zoom: number
 }
 
-const MyGoogleMap = () => {
+const MyGoogleMap = ({notes}:any) => {
 
   const location = useSelector((state: RootState) => state.location);
-  const notes = useSelector((state: RootState) => state.note.notes);
-  console.log('notes in map:', notes);
+  // const notes = useSelector((state: RootState) => state.firestore);
+  console.log('notes in map:', notes,location);
   localStorage.setItem('location', JSON.stringify(location));
 
   const defaultMapSetting: MapSetting = {
@@ -41,7 +46,7 @@ const MyGoogleMap = () => {
         center={location}
       >
         <CurrentIcon lat={location.lat} lng={location.lng} />
-        {notes.map(note => {
+        {notes && notes.map((note:any) => {
           return <NoteIcon key={note.id} lat={note.location.lat} lng={note.location.lng} text={note.note} author={note.author} />
         })}
       </GoogleMapReact>
@@ -49,4 +54,12 @@ const MyGoogleMap = () => {
   )
 }
 
-export default MyGoogleMap
+export default compose(
+  connect((state:RootState) => {
+    return ({
+      notes: state.firestore.ordered.notes,
+  })}),
+  firestoreConnect(() => [
+    { collection: 'notes'}
+  ])
+)(MyGoogleMap)

@@ -1,6 +1,6 @@
 import { ActionTypes, LocationAction } from '../actions/actionTypes';
 
-interface locationState {
+export interface locationState {
   lat: number,
   lng: number,
   err: string | null

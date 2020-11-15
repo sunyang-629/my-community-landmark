@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNote } from '../../store/actions/noteAction';
 import { RootState } from '../../store/reducers/rootReducer';
-import { Redirect } from 'react-router-dom'
+import { RouteComponentProps, Redirect } from 'react-router-dom'
 
-const CreateNote = () => {
+const CreateNote = (props:RouteComponentProps) => {
   
   const location = useSelector((state: RootState) => state.location);
 
@@ -29,7 +29,7 @@ const CreateNote = () => {
   const handleSubmit = (e:React.FormEvent<EventTarget>) => {
     e.preventDefault();
     dispatch(createNote(note));
-    // props.history.push('/');
+    props.history.push('/');
   }
 
     return (
