@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import { locationReducer } from './locationReducer';
+import { noteReducer } from './noteReducer';
 
 export const rootReducer = combineReducers({
   location: locationReducer,
-  // project: projectReducer,
+  note: noteReducer,
   // firestore: firestoreReducer,
   // firebase: firebaseReducer
 })

@@ -19,6 +19,8 @@ interface MapSetting {
 const MyGoogleMap = () => {
 
   const location = useSelector((state: RootState) => state.location);
+  const notes = useSelector((state: RootState) => state.note);
+  console.log('notes in map:', notes);
   localStorage.setItem('location', JSON.stringify(location));
 
   const defaultMapSetting: MapSetting = {
