@@ -25,8 +25,9 @@ interface MapSetting {
 const MyGoogleMap = ({notes}:any) => {
 
   const location = useSelector((state: RootState) => state.location);
+   // @ts-ignore: Unreachable code error
+  const auth = useSelector(state => state.firebase.auth);
   // const notes = useSelector((state: RootState) => state.firestore);
-  console.log('notes in map:', notes,location);
   localStorage.setItem('location', JSON.stringify(location));
 
   const defaultMapSetting: MapSetting = {
@@ -46,7 +47,7 @@ const MyGoogleMap = ({notes}:any) => {
         center={location}
       >
         <CurrentIcon lat={location.lat} lng={location.lng} />
-        {notes && notes.map((note:any) => {
+        {(notes && auth.uid) && notes.map((note:any) => {
           return <NoteIcon key={note.id} lat={note.location.lat} lng={note.location.lng} text={note.note} author={note.author} />
         })}
       </GoogleMapReact>

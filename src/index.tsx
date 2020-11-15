@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {ReactNode,FunctionComponent} from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
-import { rootReducer } from './store/reducers/rootReducer';
+import { rootReducer, RootState } from './store/reducers/rootReducer';
 
 //firebase
 import firebase from 'firebase/app';
@@ -34,11 +34,20 @@ const store = createStore(rootReducer,
     createFirestoreInstance
   }
 
+const AuthIsLoaded: FunctionComponent = ({ children }: any) => {
+   // @ts-ignore: Unreachable code error
+    const auth = useSelector((state: RootState) => state.firebase.auth)
+    if (!isLoaded(auth)) return null;
+        return children
+  }
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...rffProps}>
-        <App />
+        <AuthIsLoaded>
+          <App />
+        </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,

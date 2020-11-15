@@ -8,6 +8,10 @@ import { RouteComponentProps, Redirect } from 'react-router-dom'
 const CreateNote = (props:RouteComponentProps) => {
   
   const location = useSelector((state: RootState) => state.location);
+  // @ts-ignore: Unreachable code error
+  const profile = useSelector((state: RootState) => state.firebase.profile);
+  // @ts-ignore: Unreachable code error
+  const auth = useSelector((state: RootState) => state.firebase.auth);
 
   const [note, setNote] = useState({
     note: '',
@@ -15,10 +19,8 @@ const CreateNote = (props:RouteComponentProps) => {
       lat: location.lat,
       lng: location.lng,
     },
-    author:'test-user'
+    author: profile.userName
   });
-  // const auth = useSelector(state => state.firebase.auth);
-
 
   const dispatch = useDispatch();
 
@@ -31,7 +33,9 @@ const CreateNote = (props:RouteComponentProps) => {
     dispatch(createNote(note));
     props.history.push('/');
   }
-
+  if (!auth.uid) {
+    return <Redirect to="/signin" />
+  } else {
     return (
       <div className="container">
         <form className="white" onSubmit={handleSubmit}>
@@ -42,7 +46,7 @@ const CreateNote = (props:RouteComponentProps) => {
           </div>
           <div className="input-field">
             <label htmlFor="location">{location.lat} {location.lng}</label>
-            <input type="text" id="location" disabled/>
+            <input type="text" id="location" disabled />
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Create</button>
@@ -50,6 +54,7 @@ const CreateNote = (props:RouteComponentProps) => {
         </form>
       </div>
     )
+  }
 }
 
 export default CreateNote;

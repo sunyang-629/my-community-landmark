@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux';
-// import { signIn } from '../../store/actions/authorAction';
-// import { Redirect } from 'react-router-dom'; 
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn } from '../../store/actions/authActions';
+import { RootState } from '../../store/reducers/rootReducer';
+import { Redirect } from 'react-router-dom'; 
 
 const SignIn = () => {
   
   const [user, setUser] = useState({ email: '', password: '' });
-  // const authError = useSelector(state => state.auth.Error);
-  // const auth = useSelector(state => state.firebase.auth);
+  // @ts-ignore: Unreachable code error
+  const authError = useSelector((state: RootState) => state.auth.authError);
+  // @ts-ignore: Unreachable code error
+  const auth = useSelector((state: RootState) => state.firebase.auth);
+  
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.id]: e.target.value });
@@ -17,12 +21,12 @@ const SignIn = () => {
 
   const handleSubmit = async (e:React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    // dispatch(signIn(user));
+    dispatch(signIn(user));
   };
 
-  // if (auth.uid) {
-  //   return <Redirect to='/' />
-  // } else {
+  if (auth.uid) {
+    return <Redirect to='/' />
+  } else {
     return (
       <div className="container">
         <form className="white" onSubmit={handleSubmit}>
@@ -37,14 +41,14 @@ const SignIn = () => {
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Login</button>
-            {/* <div className="red-text center">
+            <div className="red-text center">
               {authError ? <p>{authError}</p> : null}
-            </div> */}
+            </div>
           </div>
         </form>
       </div>
     )
   }
-// }
+}
 
 export default SignIn;

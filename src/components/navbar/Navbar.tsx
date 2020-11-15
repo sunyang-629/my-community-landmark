@@ -1,19 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentLocation } from '../../store/actions/locationAction';
-// import { RootState } from '../store/reducers/rootReducer';
-import { Link,NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RootState } from '../../store/reducers/rootReducer';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
+
 
 const Navbar = () => {
   // @ts-ignore: Unreachable code error
   const auth = useSelector((state: RootState) => state.firebase.auth);
   // @ts-ignore: Unreachable code error
   const profile = useSelector((state: RootState) => state.firebase.profile);
-  // const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />
-  const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />
+  const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />
 
   return (
     <nav className="nav-wrapper grey darken-3">
