@@ -5,7 +5,7 @@ const NoteIcon = (props:any) => {
   return (
     <div>
       <SpeakerNotesIcon fontSize='large' color='primary' />
-      note
+      {props.text}-{props.author}
     </div>
   )
 }

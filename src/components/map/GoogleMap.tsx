@@ -6,6 +6,7 @@ import { getCurrentLocation } from '../../store/actions/locationAction';
 
 
 import CurrentIcon from './CurrentIcon';
+import NoteIcon from '../notes/NoteIcon';
 
 interface Location {
   lat: number,
@@ -40,6 +41,9 @@ const MyGoogleMap = () => {
         center={location}
       >
         <CurrentIcon lat={location.lat} lng={location.lng} />
+        {notes.map(note => {
+          return <NoteIcon key={note.id} lat={note.location.lat} lng={note.location.lng} text={note.note} author={note.author} />
+        })}
       </GoogleMapReact>
     </div>
   )
