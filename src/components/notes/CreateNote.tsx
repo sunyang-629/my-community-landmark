@@ -5,7 +5,40 @@ import { createNote } from '../../store/actions/noteAction';
 import { RootState } from '../../store/reducers/rootReducer';
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 
-const CreateNote = (props:RouteComponentProps) => {
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      maxWidth: '500px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: theme.spacing(7),
+    },
+    h3: {
+      marginLeft: theme.spacing(1),
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
+    button: {
+      marginTop: theme.spacing(3),
+      float:'right',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }
+  }),
+);
+
+const CreateNote = (props: RouteComponentProps) => {
+  
+  const classes = useStyles();
   
   const location = useSelector((state: RootState) => state.location);
   // @ts-ignore: Unreachable code error
@@ -22,6 +55,8 @@ const CreateNote = (props:RouteComponentProps) => {
     author: profile.userName
   });
 
+  const currentLocationString = location.lat + ' ' + location.lng
+
   const dispatch = useDispatch();
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -37,22 +72,32 @@ const CreateNote = (props:RouteComponentProps) => {
     return <Redirect to="/signin" />
   } else {
     return (
-      <div className="container">
-        <form className="white" onSubmit={handleSubmit}>
-          <h5 className="grey-text text-darken-3">Create New Note</h5>
-          <div className="input-field">
-            <label htmlFor="note">Note</label>
-            <input type="text" id="note" onChange={handleChange} required />
-          </div>
-          <div className="input-field">
-            <label htmlFor="location">{location.lat} {location.lng}</label>
-            <input type="text" id="location" disabled />
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Create</button>
-          </div>
-        </form>
-      </div>
+      <form className={classes.root} onSubmit={handleSubmit}>
+        <Typography className={classes.h3} variant="h3" gutterBottom>Create New Note</Typography>
+        <TextField
+          id="note"
+          type="string"
+          label="note"
+          style={{ margin: 8 }}
+          placeholder="new note"
+          fullWidth
+          margin="normal"
+          required
+          onChange={handleChange}
+          inputProps={{ maxLength: 32 }}
+        />
+        <TextField
+          id="location"
+          type="string"
+          label="location"
+          style={{ margin: 8 }}
+          defaultValue={currentLocationString}
+          fullWidth
+          margin="normal"
+          disabled
+        />
+        <Button variant="outlined" className={classes.button} type="submit" >Create</Button>
+      </form>
     )
   }
 }
