@@ -66,7 +66,7 @@ const SignUp = () => {
   } else {
     return (
       <form className={classes.root} onSubmit={handleSubmit}>
-          <h5 className="grey-text text-darken-3">Register with your email</h5>
+          <Typography className={classes.h3} variant="h3" gutterBottom>Register</Typography>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" onChange={handleChange} required />
