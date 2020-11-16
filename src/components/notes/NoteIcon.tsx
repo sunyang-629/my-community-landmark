@@ -10,6 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
@@ -17,10 +18,13 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 const useStyles = makeStyles({
   root: {
     minWidth: 200,
-    background: '#EEBD9F'
   },
   content: {
     color: 'white',
+  },
+  avatar: {
+    color: 'white',
+    cursor: 'cursor',
   }
 });
 
@@ -32,16 +36,18 @@ const NoteIcon = (props: any) => {
   const classes = useStyles();
   // @ts-ignore: Unreachable code error
   const profile = useSelector((state: RootState) => state.firebase.profile);
-  const color = (props.author === profile.userName) ? 'primary' : 'secondary'
+  const avatarColor = (props.author === profile.userName) ? '#0176BE' : '#D14905'
+  const contentColor = (props.author === profile.userName) ? '#90A7FF' : '#EEBD9F'
 
   return (
     <ClickAwayListener onClickAway={()=>{setisShown(false)}}>
       <div>
         <IconButton aria-label="show note details" style={{cursor: 'cursor'}} onClick={()=>{setisShown(true)}} >
-          <SpeakerNotesIcon color={color} />
+          {/* <SpeakerNotesIcon color={color} /> */}
+          <Avatar alt={props.author} src="/broken-image.jpg" className={classes.avatar} style={{background:avatarColor}} onClick={()=>{setisShown(true)}} />
         </IconButton>
-        {isShown && <Card className={classes.root} variant="outlined">
-          <CardContent className={classes.content}>
+        {isShown && <Card className={classes.root} variant="outlined" style={{background:contentColor}}>
+          <CardContent className={classes.content} >
             <Typography variant="body1" component="p">
               {props.author}:{props.text}
             </Typography>
@@ -50,9 +56,6 @@ const NoteIcon = (props: any) => {
               @{props.lat} {props.lng}
             </Typography>
           </CardContent>
-          {/* <CardActions>
-            <Button size="small" onClick={()=>{setisShown(false)}}>Close</Button>
-          </CardActions> */}
         </Card>}
       </div>
     </ClickAwayListener>
