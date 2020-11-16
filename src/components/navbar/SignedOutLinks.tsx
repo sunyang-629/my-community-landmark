@@ -1,6 +1,7 @@
 import React from 'react';
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => 
@@ -9,11 +10,18 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'white',
       textDecoration:'none'
     },
+    itemNavLink: {
+      textDecoration: 'none',
+    },
     button: {
       background: 'inherit',
       marginRight: theme.spacing(2),
       color: 'white',
       border:'none'
+    },
+    itemButton: {
+      background: 'white',
+      border: 'none',
     },
   })
 );
@@ -31,4 +39,17 @@ export const SignedOutLinks = () => {
   )
 }
 
-// export default SingedOutLinks;
+export const SignedOutMenuItems = () => { 
+  const classes = useStyles();
+
+  return (
+    <div>
+      <MenuItem>
+        <Button variant="contained" component="p" className={classes.itemButton}><NavLink to='/register' className={classes.itemNavLink} >Register</NavLink></Button>
+      </MenuItem>
+      {/* <MenuItem>
+        <Button variant="contained"  component="p" className={classes.itemButton} onClick={handleClick}>Log Out</Button>
+      </MenuItem> */}
+    </div>
+  )
+}

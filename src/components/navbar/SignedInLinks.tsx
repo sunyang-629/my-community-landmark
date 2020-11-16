@@ -74,7 +74,7 @@ export const SignedInLinks = (props:{profile:FirebaseReducer.Profile<Record<stri
   )
 }
 
-export const SignInMenuItems = () => {
+export const SignedInMenuItems = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
