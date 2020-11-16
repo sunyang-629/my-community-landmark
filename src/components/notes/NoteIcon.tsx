@@ -25,6 +25,7 @@ const useStyles = makeStyles({
   avatar: {
     color: 'white',
     cursor: 'cursor',
+    zIndex: -1
   }
 });
 
@@ -44,7 +45,7 @@ const NoteIcon = (props: any) => {
       <div>
         <IconButton aria-label="show note details" style={{cursor: 'cursor'}} onClick={()=>{setisShown(true)}} >
           {/* <SpeakerNotesIcon color={color} /> */}
-          <Avatar alt={props.author} src="/broken-image.jpg" className={classes.avatar} style={{background:avatarColor}} onClick={()=>{setisShown(true)}} />
+          <Avatar alt={props.author.toUpperCase()} src="/broken-image.jpg" className={classes.avatar} style={{background:avatarColor}} onClick={()=>{setisShown(true)}} />
         </IconButton>
         {isShown && <Card className={classes.root} variant="outlined" style={{background:contentColor}}>
           <CardContent className={classes.content} >

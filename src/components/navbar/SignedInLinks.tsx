@@ -4,6 +4,7 @@ import { getCurrentLocation } from '../../store/actions/locationAction';
 import { NavLink } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
+import NoteSwitch from '../notes/NoteSwitch';
 import { FirebaseReducer } from 'react-redux-firebase';
 import { signOut } from '../../store/actions/authActions';
 
@@ -25,7 +26,8 @@ const SingedInLinks = (props:{profile:FirebaseReducer.Profile<Record<string, any
       <li><NavLink to='/' exact><a onClick={handleLocation} ><PersonPinCircleIcon fontSize="large" /></a></NavLink></li>
       <li><NavLink to='/create'>New Note</NavLink></li>
       <li><a onClick={handleClick}>Log Out</a></li>
-      <li> WELCOME { props.profile.userName && props.profile.userName.toUpperCase() }</li>
+      <li> WELCOME {props.profile.userName && props.profile.userName.toUpperCase()}</li>
+      <li><NoteSwitch /></li>
     </ul>
   )
 }

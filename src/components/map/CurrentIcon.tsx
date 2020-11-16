@@ -5,7 +5,6 @@ const CurrentIcon = (props:any) => {
   return (
     <div>
       <LocationOnTwoToneIcon fontSize='large' color='primary' />
-      my current position
     </div>
   )
 }
