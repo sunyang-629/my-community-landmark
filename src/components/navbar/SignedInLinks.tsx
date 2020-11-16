@@ -17,7 +17,6 @@ const SingedInLinks = (props:{profile:FirebaseReducer.Profile<Record<string, any
   }
 
   const handleLocation = () => {
-    console.log('location');
     dispatch(getCurrentLocation())
   }
 

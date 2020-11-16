@@ -15,6 +15,16 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+//Navbar-import
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
+import { RootState } from '../../store/reducers/rootReducer';
+import SignedInLinks from './SignedInLinks';
+import SignedOutLinks from './SignedOutLinks';
+import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
+import { getCurrentLocation } from '../../store/actions/locationAction';
+//
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
@@ -22,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     menuButton: {
       marginRight: theme.spacing(2),
+      color:'#fff'
     },
     title: {
       display: 'none',
@@ -88,6 +99,19 @@ export default function PrimarySearchAppBar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  //narbar-funcation
+  // @ts-ignore: Unreachable code error
+  const auth = useSelector((state: RootState) => state.firebase.auth);
+  // @ts-ignore: Unreachable code error
+  const profile = useSelector((state: RootState) => state.firebase.profile);
+  const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />
+
+  const dispatch = useDispatch();
+  const handleLocation = (event: React.MouseEvent<HTMLElement>) => {
+    dispatch(getCurrentLocation())
+  }
+  //
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -167,14 +191,16 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
+        <NavLink to='/' exact>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
-            aria-label="open drawer"
+            aria-label="get current location"
+            onClick={handleLocation}
           >
-            <MenuIcon />
-          </IconButton>
+          <PersonPinCircleIcon />
+          </IconButton></NavLink>
           <Typography className={classes.title} variant="h6" noWrap>
             My Community Landmark
           </Typography>
