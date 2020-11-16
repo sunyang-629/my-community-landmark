@@ -108,6 +108,7 @@ export default function PrimarySearchAppBar() {
   // @ts-ignore: Unreachable code error
   const profile = useSelector((state: RootState) => state.firebase.profile);
   const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />
+  const menuItems = auth.uid ? <SignedOutMenuItems /> : <SignedOutMenuItems />
 
   const dispatch = useDispatch();
   const handleLocation = (event: React.MouseEvent<HTMLElement>) => {
@@ -167,8 +168,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Messages</p>
       </MenuItem> */}
-      <SignedInMenuItems />
-      <SignedOutMenuItems />
+      {menuItems}
       {/* <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">

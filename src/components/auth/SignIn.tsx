@@ -4,9 +4,41 @@ import { signIn } from '../../store/actions/authActions';
 import { RootState } from '../../store/reducers/rootReducer';
 import { Redirect } from 'react-router-dom'; 
 
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      maxWidth: '500px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: theme.spacing(7),
+    },
+    h3: {
+      marginLeft: theme.spacing(1),
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
+    button: {
+      marginTop: theme.spacing(3),
+      float:'right',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }
+  }),
+);
+
 const SignIn = () => {
   
   const [user, setUser] = useState({ email: '', password: '' });
+  const classes = useStyles();
   // @ts-ignore: Unreachable code error
   const authError = useSelector((state: RootState) => state.auth.authError);
   // @ts-ignore: Unreachable code error
@@ -28,25 +60,32 @@ const SignIn = () => {
     return <Redirect to='/' />
   } else {
     return (
-      <div className="container">
-        <form className="white" onSubmit={handleSubmit}>
-          <h5 className="grey-text text-darken-3">Sign In</h5>
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" onChange={handleChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" onChange={handleChange} />
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Login</button>
-            <div className="red-text center">
-              {authError ? <p>{authError}</p> : null}
-            </div>
-          </div>
+        <form className={classes.root} onSubmit={handleSubmit}>
+          <Typography className={classes.h3} variant="h3" gutterBottom>Login</Typography>
+          <TextField
+            id="email"
+            type="email"
+            label="email"
+            style={{ margin: 8 }}
+            placeholder="email"
+            fullWidth
+            margin="normal"
+            onChange={handleChange}
+          />
+          <TextField
+            id="password"
+            type="password"
+            label="password"
+            style={{ margin: 8 }}
+            placeholder="password"
+            fullWidth
+            margin="normal"
+            onChange={handleChange}
+          />
+          <Button variant="outlined" className={classes.button} type="submit" >Login</Button>
+              {/* {authError ? <p>{authError}</p> : null} */}
         </form>
-      </div>
+   
     )
   }
 }

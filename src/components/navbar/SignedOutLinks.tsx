@@ -47,9 +47,9 @@ export const SignedOutMenuItems = () => {
       <MenuItem>
         <Button variant="contained" component="p" className={classes.itemButton}><NavLink to='/register' className={classes.itemNavLink} >Register</NavLink></Button>
       </MenuItem>
-      {/* <MenuItem>
-        <Button variant="contained"  component="p" className={classes.itemButton} onClick={handleClick}>Log Out</Button>
-      </MenuItem> */}
+      <MenuItem>
+        <Button variant="contained" component="p" className={classes.itemButton}><NavLink to='/signin' className={classes.itemNavLink} >Login</NavLink></Button>
+      </MenuItem>
     </div>
   )
 }

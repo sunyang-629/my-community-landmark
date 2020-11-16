@@ -4,6 +4,37 @@ import { Redirect } from 'react-router-dom';
 import { RootState } from '../../store/reducers/rootReducer'; 
 import { signUp } from '../../store/actions/authActions';
 
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      maxWidth: '500px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: theme.spacing(7),
+    },
+    h3: {
+      marginLeft: theme.spacing(1),
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
+    button: {
+      marginTop: theme.spacing(3),
+      float:'right',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }
+  }),
+);
+
 const SignUp = () => {
   
   const [user, setUser] = useState({
@@ -11,6 +42,8 @@ const SignUp = () => {
     password: '',
     userName: '',
   });
+
+  const classes = useStyles();
 
   const dispatch = useDispatch();
   
@@ -32,8 +65,7 @@ const SignUp = () => {
     return <Redirect to='/' />
   } else {
     return (
-      <div className="container">
-        <form className="white" onSubmit={handleSubmit}>
+      <form className={classes.root} onSubmit={handleSubmit}>
           <h5 className="grey-text text-darken-3">Register with your email</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
@@ -54,7 +86,6 @@ const SignUp = () => {
             </div>
           </div>
         </form>
-      </div>
     )
   }
 }
