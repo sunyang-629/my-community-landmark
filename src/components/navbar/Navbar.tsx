@@ -2,8 +2,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store/reducers/rootReducer';
-import SignedInLinks from './SignedInLinks';
-import SignedOutLinks from './SignedOutLinks';
+import { SignedInLinks } from './SignedInLinks';
+import { SignedOutLinks } from './SignedOutLinks';
+
 
 
 const Navbar = () => {

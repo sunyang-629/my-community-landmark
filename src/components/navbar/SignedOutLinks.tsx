@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SingedOutLinks = () => {
+export const SignedOutLinks = () => {
 
   const classes = useStyles();
 
@@ -31,4 +31,4 @@ const SingedOutLinks = () => {
   )
 }
 
-export default SingedOutLinks;
+// export default SingedOutLinks;

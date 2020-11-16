@@ -19,8 +19,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { RootState } from '../../store/reducers/rootReducer';
-import SignedInLinks from './SignedInLinks';
-import SignedOutLinks from './SignedOutLinks';
+import { SignedInLinks, SignInMenuItems } from './SignedInLinks';
+import {SignedOutLinks} from './SignedOutLinks';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import { getCurrentLocation } from '../../store/actions/locationAction';
 //
@@ -159,14 +159,15 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
-      </MenuItem>
+      </MenuItem> */}
+      <SignInMenuItems />
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">

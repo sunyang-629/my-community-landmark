@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
 import NoteSwitch from '../notes/NoteSwitch';
 import { FirebaseReducer } from 'react-redux-firebase';
 import { signOut } from '../../store/actions/authActions';
@@ -17,6 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
     navLink: {
       color: 'white',
       textDecoration:'none'
+    },
+    navLinkItem: {
+      color: 'parimary',
+      textDecoration: 'none',
     },
     button: {
       background: 'inherit',
@@ -40,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SingedInLinks = (props:{profile:FirebaseReducer.Profile<Record<string, any>>}) => {
+export const SignedInLinks = (props:{profile:FirebaseReducer.Profile<Record<string, any>>}) => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -49,9 +54,9 @@ const SingedInLinks = (props:{profile:FirebaseReducer.Profile<Record<string, any
     dispatch(signOut());
   }
 
-  const handleLocation = () => {
-    dispatch(getCurrentLocation())
-  }
+  // const handleLocation = () => {
+  //   dispatch(getCurrentLocation())
+  // }
 
   return (
     <div>
@@ -66,4 +71,24 @@ const SingedInLinks = (props:{profile:FirebaseReducer.Profile<Record<string, any
   )
 }
 
-export default SingedInLinks;
+export const SignInMenuItems = () => {
+  const dispatch = useDispatch();
+  const classes = useStyles();
+
+  const handleClick = () => {
+    dispatch(signOut());
+  }
+
+  return (
+    <div>
+      <MenuItem>
+        {/* <IconButton aria-label="show 11 new notifications" color="inherit">
+          <Badge badgeContent={11} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton> */}
+        <NavLink to='/create' className={classes.navLinkItem} >New Note</NavLink>
+      </MenuItem>
+    </div>
+  )
+}
