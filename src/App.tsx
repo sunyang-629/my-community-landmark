@@ -17,7 +17,7 @@ function App() {
         <Switch>
           <Route path="/" component={MyGoogleMap} exact />
           <Route path="/signin" component={SignIn} exact />
-          <Route path="/signup" component={SignUp} exact />
+          <Route path="/register" component={SignUp} exact />
           <Route path="/create" component={CreateNote} />
         </Switch>
       </div>

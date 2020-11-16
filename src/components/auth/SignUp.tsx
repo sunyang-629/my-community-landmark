@@ -34,7 +34,7 @@ const SignUp = () => {
     return (
       <div className="container">
         <form className="white" onSubmit={handleSubmit}>
-          <h5 className="grey-text text-darken-3">Sign Up</h5>
+          <h5 className="grey-text text-darken-3">Register with your email</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" onChange={handleChange} required />
@@ -48,7 +48,7 @@ const SignUp = () => {
             <input type="password" id="password" onChange={handleChange} required />
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+            <button className="btn pink lighten-1 z-depth-0">Register</button>
             <div className="red-text center">
               {authError ? <p>{authError}</p> : null}
             </div>
