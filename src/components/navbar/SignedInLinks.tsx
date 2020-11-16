@@ -19,8 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'white',
       textDecoration:'none'
     },
-    navLinkItem: {
-      color: 'parimary',
+    itemNavLink: {
       textDecoration: 'none',
     },
     button: {
@@ -28,6 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(2),
       color: 'white',
       border:'none'
+    },
+    itemButton: {
+      background: 'white',
+      border: 'none',
     },
     disabledButton: {
       display: 'none',
@@ -82,12 +85,10 @@ export const SignInMenuItems = () => {
   return (
     <div>
       <MenuItem>
-        {/* <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton> */}
-        <NavLink to='/create' className={classes.navLinkItem} >New Note</NavLink>
+        <Button variant="contained"  component="p" className={classes.itemButton}><NavLink to='/create' className={classes.itemNavLink} >New Note</NavLink></Button>
+      </MenuItem>
+      <MenuItem>
+        <Button variant="contained"  component="p" className={classes.itemButton} onClick={handleClick}>Log Out</Button>
       </MenuItem>
     </div>
   )
