@@ -16,6 +16,7 @@ const SingedInLinks = (props:{profile:FirebaseReducer.Profile<Record<string, any
   }
 
   const handleLocation = () => {
+    console.log('location');
     dispatch(getCurrentLocation())
   }
 
@@ -24,7 +25,7 @@ const SingedInLinks = (props:{profile:FirebaseReducer.Profile<Record<string, any
       <li><NavLink to='/' exact><a onClick={handleLocation} ><PersonPinCircleIcon fontSize="large" /></a></NavLink></li>
       <li><NavLink to='/create'>New Note</NavLink></li>
       <li><a onClick={handleClick}>Log Out</a></li>
-      <li> WELCOME { props.profile.userName }</li>
+      <li> WELCOME { props.profile.userName && props.profile.userName.toUpperCase() }</li>
     </ul>
   )
 }
