@@ -67,24 +67,40 @@ const SignUp = () => {
     return (
       <form className={classes.root} onSubmit={handleSubmit}>
           <Typography className={classes.h3} variant="h3" gutterBottom>Register</Typography>
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" onChange={handleChange} required />
-          </div>
-          <div className="input-field">
-            <label htmlFor="userName">Username</label>
-            <input type="text" id="userName" onChange={handleChange} required />
-          </div>
-          <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" onChange={handleChange} required />
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Register</button>
-            <div className="red-text center">
-              {authError ? <p>{authError}</p> : null}
-            </div>
-          </div>
+          <TextField
+            id="email"
+            type="email"
+            label="email"
+            style={{ margin: 8 }}
+            placeholder="email"
+            fullWidth
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            id="userName"
+            type="string"
+            label="userName"
+            style={{ margin: 8 }}
+            placeholder="userName"
+            fullWidth
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            id="password"
+            type="password"
+            label="password"
+            style={{ margin: 8 }}
+            placeholder="password"
+            fullWidth
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
+          <Button variant="outlined" className={classes.button} type="submit" >Register</Button>
         </form>
     )
   }

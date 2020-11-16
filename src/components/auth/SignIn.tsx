@@ -70,6 +70,7 @@ const SignIn = () => {
             placeholder="email"
             fullWidth
             margin="normal"
+            required
             onChange={handleChange}
           />
           <TextField
@@ -80,6 +81,7 @@ const SignIn = () => {
             placeholder="password"
             fullWidth
             margin="normal"
+            required
             onChange={handleChange}
           />
           <Button variant="outlined" className={classes.button} type="submit" >Login</Button>
