@@ -1,8 +1,9 @@
 import React from 'react';
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
+
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
-import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => 
   createStyles({
