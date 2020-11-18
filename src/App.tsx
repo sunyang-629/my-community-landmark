@@ -6,6 +6,7 @@ import PrimarySearchAppBar from './components/navbar/Navbar-R';
 import CreateNote from './components/notes/CreateNote';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
+import NotFound from './components/error/NotFound';
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
           <Route path="/" component={MyGoogleMap} exact />
           <Route path="/signin" component={SignIn} exact />
           <Route path="/register" component={SignUp} exact />
-          <Route path="/create" component={CreateNote} />
+          <Route path="/create" component={CreateNote} exact />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </BrowserRouter>
