@@ -1,4 +1,4 @@
-import React, {ReactNode,FunctionComponent} from 'react';
+import React, {FunctionComponent} from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, useSelector } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
