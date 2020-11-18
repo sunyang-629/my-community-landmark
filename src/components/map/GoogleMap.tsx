@@ -56,7 +56,8 @@ const MyGoogleMap = ({notes}:any) => {
 }
 
 export default compose(
-  connect((state:RootState) => {
+  connect((state: RootState) => {
+    console.log('state:',state);
     return ({
       notes: state.firestore.ordered.notes,
   })}),

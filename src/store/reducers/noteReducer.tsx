@@ -11,13 +11,29 @@ export interface note {
 }
 
 const initState = {
-  notes: []
+  notes: [],
+  isSearching: false,
+  searchValue: ''
 }
 
 export const noteReducer = (state = initState, action: NoteAction) => {
   switch (action.type) {
     case ActionTypes.createNote:
-      console.log('created note',action.payload);
+      return state;
+    case ActionTypes.searchNotesByUser:
+      console.log('action.pay:',action);
+      return {
+        ...state,
+        isSearching: action.payload.isSearching,
+        searchValue: action.payload.searchValue,
+      }
+    case ActionTypes.getAllNotes:
+      console.log('action.pay:',action);
+      return {
+        ...state,
+        isSearching: action.payload.isSearching,
+        searchValue: action.payload.searchValue,
+      }
   }
   return state;
 }

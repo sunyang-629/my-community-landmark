@@ -5,6 +5,8 @@ export enum ActionTypes  {
   
   createNote = 'CREATE_NOTE',
   createNoteError = 'CREATE_NOTE_ERROR',
+  searchNotesByUser = 'SEARCH_NOTES_BY_USER',
+  getAllNotes = 'GET_ALL_NOTES',
 
   loginSuccess = 'LOGIN_SUCCESS',
   loginError = 'LOGIN_ERROR',
@@ -44,7 +46,17 @@ export interface CreateNoteError {
   payload:{err:string}
 }
 
-export type NoteAction = CreateNote | CreateNoteError;
+export interface SearchNotesByUser {
+  type: ActionTypes.searchNotesByUser,
+  payload: { isSearching: boolean, searchValue:string }
+}
+export interface getAllNotes {
+  type: ActionTypes.getAllNotes,
+  payload: { isSearching: boolean, searchValue:string }
+}
+
+
+export type NoteAction = CreateNote | CreateNoteError | SearchNotesByUser | getAllNotes;
 
 export interface LoginSuccess {
   type: ActionTypes.loginSuccess,

@@ -21,6 +21,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { RootState } from '../../store/reducers/rootReducer';
 import { SignedInLinks, SignedInMenuItems } from './SignedInLinks';
 import { SignedOutLinks, SignedOutMenuItems } from './SignedOutLinks';
+import  SearchBar  from './SearchBar';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import { getCurrentLocation } from '../../store/actions/locationAction';
 //
@@ -37,45 +38,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
-    },
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-      },
-    },
-    searchIcon: {
-      padding: theme.spacing(0, 2),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    inputRoot: {
-      color: 'inherit',
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
       [theme.breakpoints.up('md')]: {
-        width: '20ch',
+        display: 'block',
       },
     },
     sectionDesktop: {
@@ -108,7 +72,7 @@ export default function PrimarySearchAppBar() {
   // @ts-ignore: Unreachable code error
   const profile = useSelector((state: RootState) => state.firebase.profile);
   const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />
-  const menuItems = auth.uid ? <SignedOutMenuItems /> : <SignedOutMenuItems />
+  const menuItems = auth.uid ? <SignedInMenuItems /> : <SignedOutMenuItems />
 
   const dispatch = useDispatch();
   const handleLocation = (event: React.MouseEvent<HTMLElement>) => {
@@ -206,10 +170,10 @@ export default function PrimarySearchAppBar() {
               <PersonPinCircleIcon />
             </IconButton>
           </NavLink>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="subtitle1" noWrap>
             My Community Landmark
           </Typography>     
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -221,7 +185,8 @@ export default function PrimarySearchAppBar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
+          <SearchBar />
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {links}
