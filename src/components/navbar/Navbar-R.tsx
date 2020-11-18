@@ -24,6 +24,8 @@ import { SignedOutLinks, SignedOutMenuItems } from './SignedOutLinks';
 import  SearchBar  from './SearchBar';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import { getCurrentLocation } from '../../store/actions/locationAction';
+import { getAllNotes } from '../../store/actions/noteAction';
+
 //
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -76,6 +78,7 @@ export default function PrimarySearchAppBar() {
 
   const dispatch = useDispatch();
   const handleLocation = (event: React.MouseEvent<HTMLElement>) => {
+    dispatch(getAllNotes())
     dispatch(getCurrentLocation())
   }
   //

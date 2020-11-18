@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers/rootReducer';
-import { getAllNotes, searchNotesByUser,searchNotesByContent } from '../../store/actions/noteAction';
+import { getAllNotes, searchNotesByUser,searchNotesByContent,searchLoginNotes } from '../../store/actions/noteAction';
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import NoteIcon from '@material-ui/icons/Note';
+import Switch from '@material-ui/core/Switch';
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,12 +66,20 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
   const [searchType, setSearchType] = useState('username');
+  const [displayMyNotes, setDisplayMyNotes] = useState(false);
 
   // @ts-ignore: Unreachable code error
   const notes = useSelector((state: RootState) => state.firestore.ordered.notes);
+  // @ts-ignore: Unreachable code error
+  const profile = useSelector((state: RootState) => state.firebase.profile);
+  // @ts-ignore: Unreachable code error
   const isLoading = useSelector((state: RootState) => state.note.isLoading);
+  // @ts-ignore: Unreachable code error
   const isSearching = useSelector((state: RootState) => state.note.isSearching);
+  // @ts-ignore: Unreachable code error
   const searchString = useSelector((state: RootState) => state.note.searchString);
+  // @ts-ignore: Unreachable code error
+  const isMynotes:boolean = useSelector((state: RootState) => state.note.isMyNotes);
 
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -78,10 +88,15 @@ const SearchBar = () => {
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     const type = searchType === 'username' ? 'content' : 'username';
+    setDisplayMyNotes(false);
     setSearchType(type);
     dispatch(getAllNotes())
   }
 
+  const handleSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    !isMynotes ? dispatch(searchLoginNotes(profile.userName.toLocaleLowerCase())) : dispatch(getAllNotes())
+    setSearchType('username');
+  }
   // const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
   //   dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
   // }
@@ -97,6 +112,10 @@ const SearchBar = () => {
       : dispatch(searchNotesByContent(searchValue.toLocaleLowerCase())))
      : dispatch(getAllNotes())
   }, [searchValue])
+
+  // useEffect(() => {
+  //   displayMyNotes ? dispatch(searchLoginNotes(profile.userName.toLocaleLowerCase())) : dispatch(getAllNotes())
+  // },[displayMyNotes])
 
 
   return (
@@ -118,6 +137,13 @@ const SearchBar = () => {
         <IconButton className={classes.searchIcon} aria-label="toggle search type" onClick={handleClick}>
          { searchType === 'username' ? <PersonIcon /> : <NoteIcon />}
         </IconButton> 
+        <Switch
+        checked={isMynotes}
+        onChange={handleSwitch}
+        color="primary"
+        // name="checkedB"
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      />
       </div>
       {(isSearching && !isLoading) && <Typography className={classes.searchResult} variant="subtitle2"> {notes ? notes.length : 0} results found</Typography>}
     </div>

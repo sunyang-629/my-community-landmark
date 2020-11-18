@@ -66,7 +66,7 @@ export const SignedInLinks = (props:{profile:FirebaseReducer.Profile<Record<stri
     <div>
       <Button variant="contained" color="primary" component="p" className={classes.button} onClick={handleClearSearch}><NavLink to='/create' className={classes.navLink} >New Note</NavLink></Button>
       <Button variant="contained" color="primary" component="p" className={classes.button} onClick={handleClick}>Log Out</Button>
-      <NoteSwitch />
+      {/* <NoteSwitch /> */}
       {/* <AccountCircleIcon /> */}
       <AccountCircle className={classes.circle} />
       <Button disableElevation className={classes.disabledButton} variant="contained" color="primary" component="p">{props.profile.userName && props.profile.userName.toUpperCase()}</Button>

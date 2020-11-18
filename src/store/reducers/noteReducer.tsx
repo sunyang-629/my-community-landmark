@@ -14,13 +14,20 @@ const initState = {
   notes: [],
   isSearching: false,
   searchString: '',
-  isLoading: false
+  isLoading: false,
+  isMyNotes: false,
 }
 
 export const noteReducer = (state = initState, action: NoteAction) => {
   switch (action.type) {
     case ActionTypes.createNote:
-      return state;
+      return {
+        ...state,
+        isSearching: action.payload.isSearching,
+        searchString: action.payload.searchString,
+        isLoading: action.payload.isLoading,
+        isMyNotes: action.payload.isMyNotes,
+      };
     case ActionTypes.searchNotesByUser:
       console.log('action.pay:',action);
       return {
@@ -28,6 +35,7 @@ export const noteReducer = (state = initState, action: NoteAction) => {
         isSearching: action.payload.isSearching,
         searchString: action.payload.searchString,
         isLoading: action.payload.isLoading,
+        isMyNotes: action.payload.isMyNotes,
       }
     case ActionTypes.searchNotesByContent:
       console.log('action.pay:',action);
@@ -36,6 +44,7 @@ export const noteReducer = (state = initState, action: NoteAction) => {
         isSearching: action.payload.isSearching,
         searchString: action.payload.searchString,
         isLoading: action.payload.isLoading,
+        isMyNotes: action.payload.isMyNotes,
       }
     case ActionTypes.getAllNotes:
       console.log('action.pay:',action);
@@ -44,6 +53,15 @@ export const noteReducer = (state = initState, action: NoteAction) => {
         isSearching: action.payload.isSearching,
         searchString: action.payload.searchString,
         isLoading: action.payload.isLoading,
+        isMyNotes: action.payload.isMyNotes,
+      }
+    case ActionTypes.searchLoginNotes:
+      return {
+        ...state,
+        isSearching: action.payload.isSearching,
+        searchString: action.payload.searchString,
+        isLoading: action.payload.isLoading,
+        isMyNotes: action.payload.isMyNotes,
       }
     case ActionTypes.loadingStart:
       return {
