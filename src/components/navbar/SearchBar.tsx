@@ -7,7 +7,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import PersonIcon from '@material-ui/icons/Person';
+import NoteIcon from '@material-ui/icons/Note';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color:'white',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingLeft: `calc(0.1em + ${theme.spacing(1)}px)`,
+      // paddingLeft: `calc(0.1em + ${theme.spacing(1)}px)`,
     },
     inputRoot: {
       color: 'inherit',
@@ -75,6 +76,12 @@ const SearchBar = () => {
     !isLoading && setSearchValue(e.target.value);
   }
 
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const type = searchType === 'username' ? 'content' : 'username';
+    setSearchType(type);
+    dispatch(getAllNotes())
+  }
+
   // const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
   //   dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
   // }
@@ -88,9 +95,6 @@ const SearchBar = () => {
     searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
   }, [searchValue])
 
-  // useEffect(() => {
-  //   searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
-  // }, [])
 
   return (
     <div>
@@ -108,12 +112,9 @@ const SearchBar = () => {
           onChange={handleChange}
           value={searchString}
         />
-          {/* {(searchValue && !isSearching) && <IconButton className={classes.searchIcon} aria-label="do search" onClick={handleSearch}>
-            <SearchIcon />
-          </IconButton> }
-          {searchValue && <IconButton className={classes.searchIcon} aria-label="clear search" onClick={handleClearSearch}>
-            <HighlightOffIcon /> 
-          </IconButton>} */}
+        <IconButton className={classes.searchIcon} aria-label="toggle search type" onClick={handleClick}>
+         { searchType === 'username' ? <PersonIcon /> : <NoteIcon />}
+        </IconButton> 
       </div>
       {(isSearching && !isLoading) && <Typography className={classes.searchResult} variant="subtitle2"> {notes ? notes.length : 0} results found</Typography>}
     </div>
