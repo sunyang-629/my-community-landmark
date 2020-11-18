@@ -5,6 +5,8 @@ export enum ActionTypes  {
   
   createNote = 'CREATE_NOTE',
   createNoteError = 'CREATE_NOTE_ERROR',
+  loadingStart = 'LOADING_START',
+  loadingEnd = 'LOADING_END',
   searchNotesByUser = 'SEARCH_NOTES_BY_USER',
   getAllNotes = 'GET_ALL_NOTES',
 
@@ -48,15 +50,20 @@ export interface CreateNoteError {
 
 export interface SearchNotesByUser {
   type: ActionTypes.searchNotesByUser,
-  payload: { isSearching: boolean, searchValue:string }
+  payload: { isSearching: boolean, isLoading:boolean }
 }
-export interface getAllNotes {
+export interface GetAllNotes {
   type: ActionTypes.getAllNotes,
-  payload: { isSearching: boolean, searchValue:string }
+  payload: { isSearching: boolean,  isLoading:boolean}
+}
+
+export interface LoadingStart {
+  type: ActionTypes.loadingStart,
+  payload: { isLoading: boolean }
 }
 
 
-export type NoteAction = CreateNote | CreateNoteError | SearchNotesByUser | getAllNotes;
+export type NoteAction = CreateNote | CreateNoteError | SearchNotesByUser | GetAllNotes | LoadingStart;
 
 export interface LoginSuccess {
   type: ActionTypes.loginSuccess,

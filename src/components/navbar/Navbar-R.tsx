@@ -186,7 +186,7 @@ export default function PrimarySearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div> */}
-          <SearchBar />
+          {auth.uid && <SearchBar />}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {links}

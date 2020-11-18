@@ -28,17 +28,18 @@ export const createNote = (note:note) => (dispatch:Dispatch<NoteAction>,getState
 
 export const getAllNotes = () => (dispatch: Dispatch<NoteAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firestore = getFirestore();
+  dispatch({ type: ActionTypes.loadingStart, payload: { isLoading: true } });
   console.log('getall');
   firestore.get({ collection: 'notes' }).then(() => {
-    dispatch({type:ActionTypes.getAllNotes, payload:{isSearching:false,searchValue:''}})
+    dispatch({type:ActionTypes.getAllNotes, payload:{isSearching:false,isLoading:false}})
   }).catch();
 }
 
 export const searchNotesByUser = (username: string) => (dispatch: Dispatch<NoteAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firestore = getFirestore();
-  console.log('username:',username);
+  dispatch({ type: ActionTypes.loadingStart, payload: { isLoading: true } });
   firestore.get({ collection: 'notes',where: ['author', '==', username] })
     .then(() => {
-      dispatch({type:ActionTypes.searchNotesByUser, payload:{isSearching:true,searchValue:username}})
+      dispatch({type:ActionTypes.searchNotesByUser, payload:{isSearching:true,isLoading:false}})
     }).catch()
 }

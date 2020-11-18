@@ -62,28 +62,35 @@ const SearchBar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
+  const [searchType, setSearchType] = useState('username');
 
   // @ts-ignore: Unreachable code error
   const notes = useSelector((state: RootState) => state.firestore.ordered.notes);
+  const isLoading = useSelector((state: RootState) => state.note.isLoading);
   const isSearching = useSelector((state: RootState) => state.note.isSearching);
-  const value = useSelector((state: RootState) => state.note.searchValue);
+  // const value = useSelector((state: RootState) => state.note.searchValue);
 
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    !isSearching && setSearchValue(e.target.value);
+    !isLoading && setSearchValue(e.target.value);
   }
 
-  const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
-    dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
-  }
+  // const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
+  //   dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
+  // }
 
-  const handleClearSearch = (event: React.MouseEvent<HTMLElement>) => {
-    setSearchValue('');
-    dispatch(getAllNotes())
-  }
-  // useEffect(() => {
-  //   searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
-  // }, [searchValue])
+  // const handleClearSearch = (event: React.MouseEvent<HTMLElement>) => {
+  //   setSearchValue('');
+  //   dispatch(getAllNotes())
+  // }
+
+  useEffect(() => {
+    searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
+  }, [searchValue])
+
+  useEffect(() => {
+    searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
+  }, [])
 
   return (
     <div>
@@ -99,16 +106,16 @@ const SearchBar = () => {
           }}
           inputProps={{ 'aria-label': 'search' }}
           onChange={handleChange}
-          value={searchValue}  
+          value={searchValue}
         />
-          {(searchValue && !isSearching) && <IconButton className={classes.searchIcon} aria-label="do search" onClick={handleSearch}>
+          {/* {(searchValue && !isSearching) && <IconButton className={classes.searchIcon} aria-label="do search" onClick={handleSearch}>
             <SearchIcon />
           </IconButton> }
           {searchValue && <IconButton className={classes.searchIcon} aria-label="clear search" onClick={handleClearSearch}>
             <HighlightOffIcon /> 
-          </IconButton>}
+          </IconButton>} */}
       </div>
-      {isSearching && <Typography className={classes.searchResult} variant="subtitle2"> {notes ? notes.length : 0} results found</Typography>}
+      {(isSearching && !isLoading) && <Typography className={classes.searchResult} variant="subtitle2"> {notes ? notes.length : 0} results found</Typography>}
     </div>
 
   )
