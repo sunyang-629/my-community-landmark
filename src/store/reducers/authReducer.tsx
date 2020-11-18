@@ -14,7 +14,7 @@ export const authReducer = (state = initState, action: LoginAction|LogoutAction|
     case ActionTypes.loginError:
       return {
         ...state,
-        authError: 'login failed'
+        authError: action.payload.err
       };
     case ActionTypes.logoutSuccess:
       return {
@@ -29,7 +29,7 @@ export const authReducer = (state = initState, action: LoginAction|LogoutAction|
     case ActionTypes.signUpError:
       return {
         ...state,
-        authError: 'sign up failed'
+        authError: action.payload.err
       }
     default:
       return state;

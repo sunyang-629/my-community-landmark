@@ -28,6 +28,14 @@ export const noteReducer = (state = initState, action: NoteAction) => {
         isLoading: action.payload.isLoading,
         isMyNotes: action.payload.isMyNotes,
       };
+    case ActionTypes.createNoteError:
+      return {
+        ...state,
+        isSearching: action.payload.isSearching,
+        searchString: action.payload.searchString,
+        isLoading: action.payload.isLoading,
+        isMyNotes: action.payload.isMyNotes,
+      }
     case ActionTypes.searchNotesByUser:
       console.log('action.pay:',action);
       return {
@@ -48,6 +56,14 @@ export const noteReducer = (state = initState, action: NoteAction) => {
       }
     case ActionTypes.getAllNotes:
       console.log('action.pay:',action);
+      return {
+        ...state,
+        isSearching: action.payload.isSearching,
+        searchString: action.payload.searchString,
+        isLoading: action.payload.isLoading,
+        isMyNotes: action.payload.isMyNotes,
+      }
+    case ActionTypes.getNotesError:
       return {
         ...state,
         isSearching: action.payload.isSearching,

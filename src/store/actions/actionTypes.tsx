@@ -11,6 +11,7 @@ export enum ActionTypes  {
   searchNotesByContent = 'SEARCH_NOTES_BY_CONTENT',
   searchLoginNotes = 'SEARCH_LOGIN_NOTES',
   getAllNotes = 'GET_ALL_NOTES',
+  getNotesError = 'GET_NOTES_ERROR',
 
   loginSuccess = 'LOGIN_SUCCESS',
   loginError = 'LOGIN_ERROR',
@@ -43,11 +44,11 @@ export interface note {
 }
 export interface CreateNote {
   type: ActionTypes.createNote,
-  payload:{note:note,isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean}
+  payload:{ note:note,isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean}
 }
 export interface CreateNoteError {
   type: ActionTypes.createNoteError,
-  payload:{err:string}
+  payload:{err:string, isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean}
 }
 
 export interface SearchNotesByUser {
@@ -68,17 +69,22 @@ export interface GetAllNotes {
   payload: { isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean }
 }
 
+export interface GetNotesError {
+  type: ActionTypes.getNotesError,
+  payload: { isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean }
+}
+
 export interface LoadingStart {
   type: ActionTypes.loadingStart,
   payload: { isLoading: boolean }
 }
 
 
-export type NoteAction = CreateNote | CreateNoteError | SearchNotesByUser | SearchLoginNotes| SearchNotesByContent | GetAllNotes | LoadingStart;
+export type NoteAction = CreateNote | CreateNoteError | SearchNotesByUser | SearchLoginNotes| SearchNotesByContent | GetAllNotes | GetNotesError | LoadingStart;
 
 export interface LoginSuccess {
   type: ActionTypes.loginSuccess,
-  payload: { err: null }
+  payload: { err: string }
 }
 
 export interface LoginError {
@@ -90,14 +96,14 @@ export type LoginAction = LoginSuccess | LoginError;
 
 export interface LogoutSuccess {
   type: ActionTypes.logoutSuccess,
-  payload: { err: null }
+  payload: { err: string }
 }
 
 export type LogoutAction = LogoutSuccess;
 
 export interface SignUpSuccess {
   type: ActionTypes.signUpSuccess,
-  payload: {err:null}
+  payload: { err: string }
 }
 
 export interface SignUpError {

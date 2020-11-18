@@ -18,16 +18,17 @@ export const signIn = (credentials: signInState) => (dispatch: Dispatch<LoginAct
     credentials.email,
     credentials.password
   ).then(() => {
-    dispatch({ type: ActionTypes.loginSuccess, payload:{err:null} });
-  }).catch((err: string) => {
-    dispatch({ type: ActionTypes.loginError, payload: { err } });
+    dispatch({ type: ActionTypes.loginSuccess, payload: { err: '' } });
+  }).catch((err) => {
+    console.log('error',err);
+    dispatch({ type: ActionTypes.loginError, payload: { err:err.message } });
   })
 };
 
 export const signOut = () => (dispatch: Dispatch<LogoutAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firebase = getFirebase();
   firebase.auth().signOut().then(() => {
-    dispatch({ type: ActionTypes.logoutSuccess,payload:{err:null} });
+    dispatch({ type: ActionTypes.logoutSuccess, payload: { err: '' } });
   })
 }
 
@@ -43,8 +44,8 @@ export const signUp = (newUser:SignUpState) => (dispatch: Dispatch<SignUpAction>
       userName: newUser.userName.toLowerCase()
     })
   }).then(() => {
-    dispatch({ type: ActionTypes.signUpSuccess, payload:{err:null} })
-  }).catch((err: string) => {
-    dispatch({ type: ActionTypes.signUpError, payload: { err } })
+    dispatch({ type: ActionTypes.signUpSuccess, payload: { err: '' } })
+  }).catch((err) => {
+    dispatch({ type: ActionTypes.signUpError, payload: { err: err.message } })
   })
 }

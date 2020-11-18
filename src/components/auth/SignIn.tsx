@@ -86,7 +86,9 @@ const SignIn = () => {
             required
             onChange={handleChange}
           />
-          <Button variant="outlined" className={classes.button} type="submit" >Login</Button>
+        {authError ? <Typography color="secondary" variant="subtitle1" gutterBottom>{ authError }</Typography> : null}
+        <Button variant="outlined"  className={classes.button} type="submit" >Login</Button>
+        {/* {authError ? <Typography variant="subtitle1" gutterBottom>{ authError }</Typography> : null} */}
               {/* {authError ? <p>{authError}</p> : null} */}
         </form>
    
