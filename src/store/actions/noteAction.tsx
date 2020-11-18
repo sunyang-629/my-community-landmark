@@ -18,7 +18,8 @@ export const createNote = (note:note) => (dispatch:Dispatch<NoteAction>,getState
   firestore.add({
     collection: 'notes'
   },{
-      ...note
+      ...note,
+    lowcaseNote:note.note.toLowerCase(),
   }).then((res:any) => {
     dispatch({ type: ActionTypes.createNote, payload: { note: res } })
   }).catch((err:string) => {
@@ -38,8 +39,19 @@ export const getAllNotes = () => (dispatch: Dispatch<NoteAction>, getState: Func
 export const searchNotesByUser = (username: string) => (dispatch: Dispatch<NoteAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firestore = getFirestore();
   dispatch({ type: ActionTypes.loadingStart, payload: { isLoading: true } });
+  console.log('byuser');
   firestore.get({ collection: 'notes',where: ['author', '==', username] })
     .then(() => {
       dispatch({type:ActionTypes.searchNotesByUser, payload:{isSearching:true,isLoading:false,searchString:username}})
     }).catch()
+}
+
+export const searchNotesByContent = (content: string) => (dispatch: Dispatch<NoteAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
+  const firestore = getFirestore();
+  dispatch({ type: ActionTypes.loadingStart, payload: { isLoading: true } });
+  console.log('bycontent',content);
+  firestore.get({ collection: 'notes', orderBy: ['lowcaseNote'], startAt: content.toLocaleLowerCase(), endAt: content.toLocaleLowerCase()+"\uf8ff" })
+    .then(() => {
+      dispatch({type:ActionTypes.searchNotesByContent, payload:{isSearching:true,isLoading:false,searchString:content}})
+    }).catch();
 }

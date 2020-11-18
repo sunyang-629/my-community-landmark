@@ -40,7 +40,7 @@ export const signUp = (newUser:SignUpState) => (dispatch: Dispatch<SignUpAction>
     newUser.password,
   ).then((resp:any) => {
     return firestore.collection('users').doc(resp.user.uid).set({
-      userName:newUser.userName
+      userName: newUser.userName.toLowerCase()
     })
   }).then(() => {
     dispatch({ type: ActionTypes.signUpSuccess, payload:{err:null} })

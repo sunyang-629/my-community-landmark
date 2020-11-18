@@ -29,6 +29,14 @@ export const noteReducer = (state = initState, action: NoteAction) => {
         searchString: action.payload.searchString,
         isLoading: action.payload.isLoading,
       }
+    case ActionTypes.searchNotesByContent:
+      console.log('action.pay:',action);
+      return {
+        ...state,
+        isSearching: action.payload.isSearching,
+        searchString: action.payload.searchString,
+        isLoading: action.payload.isLoading,
+      }
     case ActionTypes.getAllNotes:
       console.log('action.pay:',action);
       return {

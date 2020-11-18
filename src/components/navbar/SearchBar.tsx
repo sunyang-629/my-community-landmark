@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers/rootReducer';
-import { getAllNotes, searchNotesByUser } from '../../store/actions/noteAction';
+import { getAllNotes, searchNotesByUser,searchNotesByContent } from '../../store/actions/noteAction';
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
@@ -92,7 +92,10 @@ const SearchBar = () => {
   // }
 
   useEffect(() => {
-    searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
+    searchValue ? ( (searchType === 'username')
+      ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
+      : dispatch(searchNotesByContent(searchValue)))
+     : dispatch(getAllNotes())
   }, [searchValue])
 
 
