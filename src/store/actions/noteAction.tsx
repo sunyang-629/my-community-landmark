@@ -40,7 +40,7 @@ export const searchNotesByUser = (username: string) => (dispatch: Dispatch<NoteA
   const firestore = getFirestore();
   dispatch({ type: ActionTypes.loadingStart, payload: { isLoading: true } });
   console.log('byuser');
-  firestore.get({ collection: 'notes',where: ['author', '==', username] })
+  firestore.get({ collection: 'notes', orderBy: ['author'], startAt: username, endAt: username+"\uf8ff"  })
     .then(() => {
       dispatch({type:ActionTypes.searchNotesByUser, payload:{isSearching:true,isLoading:false,searchString:username}})
     }).catch()
@@ -50,7 +50,7 @@ export const searchNotesByContent = (content: string) => (dispatch: Dispatch<Not
   const firestore = getFirestore();
   dispatch({ type: ActionTypes.loadingStart, payload: { isLoading: true } });
   console.log('bycontent',content);
-  firestore.get({ collection: 'notes', orderBy: ['lowcaseNote'], startAt: content.toLocaleLowerCase(), endAt: content.toLocaleLowerCase()+"\uf8ff" })
+  firestore.get({ collection: 'notes', orderBy: ['lowcaseNote'], startAt: content, endAt: content+"\uf8ff" })
     .then(() => {
       dispatch({type:ActionTypes.searchNotesByContent, payload:{isSearching:true,isLoading:false,searchString:content}})
     }).catch();

@@ -94,7 +94,7 @@ const SearchBar = () => {
   useEffect(() => {
     searchValue ? ( (searchType === 'username')
       ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
-      : dispatch(searchNotesByContent(searchValue)))
+      : dispatch(searchNotesByContent(searchValue.toLocaleLowerCase())))
      : dispatch(getAllNotes())
   }, [searchValue])
 
