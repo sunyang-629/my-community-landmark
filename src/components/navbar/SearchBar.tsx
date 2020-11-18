@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { RootState } from '../../store/reducers/rootReducer';
 import { getAllNotes, searchNotesByUser,searchNotesByContent,searchLoginNotes } from '../../store/actions/noteAction';
+
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -35,7 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
       color:'white',
       alignItems: 'center',
       justifyContent: 'center',
-      // paddingLeft: `calc(0.1em + ${theme.spacing(1)}px)`,
     },
     inputRoot: {
       color: 'inherit',
@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(1)}px)`,
       transition: theme.transitions.create('width'),
       width: '100%',
@@ -64,66 +63,43 @@ const SearchBar = () => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState('');
-  const [searchType, setSearchType] = useState('username');
-  const [displayMyNotes, setDisplayMyNotes] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [searchType, setSearchType] = useState<string>('username');
+  // const [displayMyNotes, setDisplayMyNotes] = useState(false);
 
   // @ts-ignore: Unreachable code error
   const notes = useSelector((state: RootState) => state.firestore.ordered.notes);
   // @ts-ignore: Unreachable code error
   const profile = useSelector((state: RootState) => state.firebase.profile);
-  // @ts-ignore: Unreachable code error
-  const isLoading = useSelector((state: RootState) => state.note.isLoading);
-  // @ts-ignore: Unreachable code error
-  const isSearching = useSelector((state: RootState) => state.note.isSearching);
-  // @ts-ignore: Unreachable code error
-  const searchString = useSelector((state: RootState) => state.note.searchString);
-  // @ts-ignore: Unreachable code error
-  const isMynotes:boolean = useSelector((state: RootState) => state.note.isMyNotes);
+  const note = useSelector((state: RootState) => state.note);
 
 
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    !isLoading && setSearchValue(e.target.value);
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    !note.isLoading && setSearchValue(event.target.value);
   }
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     const type = searchType === 'username' ? 'content' : 'username';
-    setDisplayMyNotes(false);
     setSearchType(type);
     dispatch(getAllNotes())
   }
 
-  const handleSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    !isMynotes ? dispatch(searchLoginNotes(profile.userName.toLocaleLowerCase())) : dispatch(getAllNotes())
+  const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    !note.isMyNotes ? dispatch(searchLoginNotes(profile.userName.toLocaleLowerCase())) : dispatch(getAllNotes())
     setSearchType('username');
   }
-  // const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
-  //   dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
-  // }
-
-  // const handleClearSearch = (event: React.MouseEvent<HTMLElement>) => {
-  //   setSearchValue('');
-  //   dispatch(getAllNotes())
-  // }
 
   useEffect(() => {
     searchValue ? ( (searchType === 'username')
       ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
       : dispatch(searchNotesByContent(searchValue.toLocaleLowerCase())))
      : dispatch(getAllNotes())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue])
-
-  // useEffect(() => {
-  //   displayMyNotes ? dispatch(searchLoginNotes(profile.userName.toLocaleLowerCase())) : dispatch(getAllNotes())
-  // },[displayMyNotes])
-
 
   return (
     <div>
       <div className={classes.search}>
-        {/* <div className={classes.searchIcon}>
-          <SearchIcon />
-        </div> */}
         <InputBase
           placeholder="Search…"
           classes={{
@@ -132,22 +108,20 @@ const SearchBar = () => {
           }}
           inputProps={{ 'aria-label': 'search' }}
           onChange={handleChange}
-          value={searchString}
+          value={note.searchString}
         />
         <IconButton className={classes.searchIcon} aria-label="toggle search type" onClick={handleClick}>
          { searchType === 'username' ? <PersonIcon /> : <NoteIcon />}
         </IconButton> 
         <Switch
-        checked={isMynotes}
+        checked={note.isMyNotes}
         onChange={handleSwitch}
         color="primary"
-        // name="checkedB"
-        inputProps={{ 'aria-label': 'primary checkbox' }}
+        inputProps={{ 'aria-label': 'toggle search type' }}
       />
       </div>
-      {(isSearching && !isLoading) && <Typography className={classes.searchResult} variant="subtitle2"> {notes ? notes.length : 0} results found</Typography>}
+      {(note.isSearching && !note.isLoading) && <Typography className={classes.searchResult} variant="subtitle2"> {notes ? notes.length : 0} results found</Typography>}
     </div>
-
   )
 }
 
