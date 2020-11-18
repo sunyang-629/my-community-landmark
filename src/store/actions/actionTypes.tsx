@@ -50,11 +50,11 @@ export interface CreateNoteError {
 
 export interface SearchNotesByUser {
   type: ActionTypes.searchNotesByUser,
-  payload: { isSearching: boolean, isLoading:boolean }
+  payload: { isSearching: boolean, isLoading:boolean, searchString:string }
 }
 export interface GetAllNotes {
   type: ActionTypes.getAllNotes,
-  payload: { isSearching: boolean,  isLoading:boolean}
+  payload: { isSearching: boolean,  isLoading:boolean, searchString:string}
 }
 
 export interface LoadingStart {

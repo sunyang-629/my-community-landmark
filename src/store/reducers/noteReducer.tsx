@@ -13,7 +13,7 @@ export interface note {
 const initState = {
   notes: [],
   isSearching: false,
-  // searchValue: '',
+  searchString: '',
   isLoading: false
 }
 
@@ -26,7 +26,7 @@ export const noteReducer = (state = initState, action: NoteAction) => {
       return {
         ...state,
         isSearching: action.payload.isSearching,
-        // searchValue: action.payload.searchValue,
+        searchString: action.payload.searchString,
         isLoading: action.payload.isLoading,
       }
     case ActionTypes.getAllNotes:
@@ -34,7 +34,7 @@ export const noteReducer = (state = initState, action: NoteAction) => {
       return {
         ...state,
         isSearching: action.payload.isSearching,
-        // searchValue: action.payload.searchValue,
+        searchString: action.payload.searchString,
         isLoading: action.payload.isLoading,
       }
     case ActionTypes.loadingStart:

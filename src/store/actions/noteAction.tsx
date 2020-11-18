@@ -31,7 +31,7 @@ export const getAllNotes = () => (dispatch: Dispatch<NoteAction>, getState: Func
   dispatch({ type: ActionTypes.loadingStart, payload: { isLoading: true } });
   console.log('getall');
   firestore.get({ collection: 'notes' }).then(() => {
-    dispatch({type:ActionTypes.getAllNotes, payload:{isSearching:false,isLoading:false}})
+    dispatch({type:ActionTypes.getAllNotes, payload:{isSearching:false,isLoading:false,searchString:''}})
   }).catch();
 }
 
@@ -40,6 +40,6 @@ export const searchNotesByUser = (username: string) => (dispatch: Dispatch<NoteA
   dispatch({ type: ActionTypes.loadingStart, payload: { isLoading: true } });
   firestore.get({ collection: 'notes',where: ['author', '==', username] })
     .then(() => {
-      dispatch({type:ActionTypes.searchNotesByUser, payload:{isSearching:true,isLoading:false}})
+      dispatch({type:ActionTypes.searchNotesByUser, payload:{isSearching:true,isLoading:false,searchString:username}})
     }).catch()
 }

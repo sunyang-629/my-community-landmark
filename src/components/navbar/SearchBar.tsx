@@ -68,7 +68,7 @@ const SearchBar = () => {
   const notes = useSelector((state: RootState) => state.firestore.ordered.notes);
   const isLoading = useSelector((state: RootState) => state.note.isLoading);
   const isSearching = useSelector((state: RootState) => state.note.isSearching);
-  // const value = useSelector((state: RootState) => state.note.searchValue);
+  const searchString = useSelector((state: RootState) => state.note.searchString);
 
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -88,9 +88,9 @@ const SearchBar = () => {
     searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
   }, [searchValue])
 
-  useEffect(() => {
-    searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
-  }, [])
+  // useEffect(() => {
+  //   searchValue ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase())) : dispatch(getAllNotes())
+  // }, [])
 
   return (
     <div>
@@ -106,7 +106,7 @@ const SearchBar = () => {
           }}
           inputProps={{ 'aria-label': 'search' }}
           onChange={handleChange}
-          value={searchValue}
+          value={searchString}
         />
           {/* {(searchValue && !isSearching) && <IconButton className={classes.searchIcon} aria-label="do search" onClick={handleSearch}>
             <SearchIcon />

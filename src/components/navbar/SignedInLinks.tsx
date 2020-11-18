@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import NoteSwitch from '../notes/NoteSwitch';
 import { FirebaseReducer } from 'react-redux-firebase';
 import { signOut } from '../../store/actions/authActions';
+import { getAllNotes } from '../../store/actions/noteAction';
 
 const useStyles = makeStyles((theme: Theme) => 
   createStyles({
@@ -57,13 +58,13 @@ export const SignedInLinks = (props:{profile:FirebaseReducer.Profile<Record<stri
     dispatch(signOut());
   }
 
-  // const handleLocation = () => {
-  //   dispatch(getCurrentLocation())
-  // }
+  const handleClearSearch = () => {
+    dispatch(getAllNotes())
+  }
 
   return (
     <div>
-      <Button variant="contained" color="primary" component="p" className={classes.button}><NavLink to='/create' className={classes.navLink} >New Note</NavLink></Button>
+      <Button variant="contained" color="primary" component="p" className={classes.button} onClick={handleClearSearch}><NavLink to='/create' className={classes.navLink} >New Note</NavLink></Button>
       <Button variant="contained" color="primary" component="p" className={classes.button} onClick={handleClick}>Log Out</Button>
       <NoteSwitch />
       {/* <AccountCircleIcon /> */}
@@ -81,11 +82,15 @@ export const SignedInMenuItems = () => {
   const handleClick = () => {
     dispatch(signOut());
   }
+  
+  const handleClearSearch = () => {
+    dispatch(getAllNotes())
+  }
 
   return (
     <div>
       <MenuItem>
-        <Button variant="contained"  component="p" className={classes.itemButton}><NavLink to='/create' className={classes.itemNavLink} >New Note</NavLink></Button>
+        <Button variant="contained"  component="p" className={classes.itemButton} onClick={handleClearSearch}><NavLink to='/create' className={classes.itemNavLink} >New Note</NavLink></Button>
       </MenuItem>
       <MenuItem>
         <Button variant="contained"  component="p" className={classes.itemButton} onClick={handleClick}>Log Out</Button>
