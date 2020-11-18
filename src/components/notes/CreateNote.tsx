@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: 'auto',
       marginRight: 'auto',
       marginTop: theme.spacing(7),
+      height:'100%',
+      backgroundColor:'#F5F5F5'
     },
     h3: {
       marginLeft: theme.spacing(1),
