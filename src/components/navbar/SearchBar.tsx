@@ -65,7 +65,6 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchType, setSearchType] = useState<string>('username');
-  // const [displayMyNotes, setDisplayMyNotes] = useState(false);
 
   // @ts-ignore: Unreachable code error
   const notes = useSelector((state: RootState) => state.firestore.ordered.notes);
@@ -93,7 +92,7 @@ const SearchBar = () => {
     searchValue ? ( (searchType === 'username')
       ? dispatch(searchNotesByUser(searchValue.toLocaleLowerCase()))
       : dispatch(searchNotesByContent(searchValue.toLocaleLowerCase())))
-     : dispatch(getAllNotes())
+      : dispatch(getAllNotes())
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue])
 
@@ -111,7 +110,7 @@ const SearchBar = () => {
           value={note.searchString}
         />
         <IconButton className={classes.searchIcon} aria-label="toggle search type" onClick={handleClick}>
-         { searchType === 'username' ? <PersonIcon /> : <NoteIcon />}
+          { searchType === 'username' ? <PersonIcon /> : <NoteIcon />}
         </IconButton> 
         <Switch
         checked={note.isMyNotes}

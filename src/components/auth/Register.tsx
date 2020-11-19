@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+
 import { RootState } from '../../store/reducers/rootReducer'; 
 import { register } from '../../store/actions/authActions';
 

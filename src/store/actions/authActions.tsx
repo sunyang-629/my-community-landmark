@@ -1,7 +1,7 @@
 import { ActionTypes, LoginAction, LogoutAction, SignUpAction } from './actionTypes';
 import { Dispatch } from "redux";
 
-type loginState = {
+export type loginState = {
   email: string,
   password: string,
 }

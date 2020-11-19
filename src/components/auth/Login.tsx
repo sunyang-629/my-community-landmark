@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/actions/authActions';
-import { RootState } from '../../store/reducers/rootReducer';
 import { Redirect } from 'react-router-dom'; 
+
+import { login, loginState } from '../../store/actions/authActions';
+import { RootState } from '../../store/reducers/rootReducer';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -39,15 +40,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Login = () => {
   
-  const [user, setUser] = useState({ email: '', password: '' });
+  const [user, setUser] = useState<loginState>({ email: '', password: '' });
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   // @ts-ignore: Unreachable code error
   const authError = useSelector((state: RootState) => state.auth.authError);
   // @ts-ignore: Unreachable code error
   const auth = useSelector((state: RootState) => state.firebase.auth);
-  
-
-  const dispatch = useDispatch()
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.id]: e.target.value });
@@ -62,34 +62,33 @@ const Login = () => {
     return <Redirect to='/' />
   } else {
     return (
-        <form className={classes.root} onSubmit={handleSubmit}>
-          <Typography className={classes.h3} variant="h3" gutterBottom>Login</Typography>
-          <TextField
-            id="email"
-            type="email"
-            label="email"
-            style={{ margin: 8 }}
-            placeholder="email"
-            fullWidth
-            margin="normal"
-            required
-            onChange={handleChange}
-          />
-          <TextField
-            id="password"
-            type="password"
-            label="password"
-            style={{ margin: 8 }}
-            placeholder="password"
-            fullWidth
-            margin="normal"
-            required
-            onChange={handleChange}
-          />
+      <form className={classes.root} onSubmit={handleSubmit}>
+        <Typography className={classes.h3} variant="h3" gutterBottom>Login</Typography>
+        <TextField
+          id="email"
+          type="email"
+          label="email"
+          style={{ margin: 8 }}
+          placeholder="email"
+          fullWidth
+          margin="normal"
+          required
+          onChange={handleChange}
+        />
+        <TextField
+          id="password"
+          type="password"
+          label="password"
+          style={{ margin: 8 }}
+          placeholder="password"
+          fullWidth
+          margin="normal"
+          required
+          onChange={handleChange}
+        />
         {authError ? <Typography color="secondary" variant="subtitle1" gutterBottom>{ authError }</Typography> : null}
         <Button variant="outlined"  className={classes.button} type="submit" >Login</Button>
-        </form>
-   
+      </form> 
     )
   }
 }
