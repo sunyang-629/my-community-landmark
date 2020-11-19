@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 
 const NoteIcon = (props: any) => {
   
-  const [isShown, setIsShown] = useState(false)
+  const [isShown, setIsShown] = useState<boolean>(false)
 
   const classes = useStyles();
   // @ts-ignore: Unreachable code error
@@ -54,7 +54,6 @@ const NoteIcon = (props: any) => {
         </Card>}
       </div>
     </ClickAwayListener>
-    
   )
 }
 
