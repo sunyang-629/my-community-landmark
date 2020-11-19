@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import GoogleMapReact from 'google-map-react';
-import { connect, useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../../store/reducers/rootReducer';
 import { firestoreConnect } from 'react-redux-firebase';
+import { getCurrentLocation } from '../../store/actions/locationActions';
 
 import CurrentIcon from './CurrentIcon';
 import NoteIcon from '../notes/NoteIcon';
@@ -20,6 +21,8 @@ interface MapSetting {
 
 const MyGoogleMap = ({notes}:any) => {
 
+  const dispatch = useDispatch();
+
   const location = useSelector((state: RootState) => state.location);
    // @ts-ignore: Unreachable code error
   const auth = useSelector(state => state.firebase.auth);
@@ -34,10 +37,15 @@ const MyGoogleMap = ({notes}:any) => {
     zoom: 15
   }
 
+  useEffect(() => {
+    dispatch(getCurrentLocation());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
   return (
     <div style={{ height: '90vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU' && process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={defaultMapSetting.center}
         defaultZoom={defaultMapSetting.zoom}
         center={location}
