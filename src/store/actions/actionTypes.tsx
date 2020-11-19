@@ -1,4 +1,4 @@
-import { NoteState } from './noteAction';
+import { NoteState } from './noteActions';
 
 export enum ActionTypes  {
   getCurrentLocation = 'GET_CURRENT_LOCATION',

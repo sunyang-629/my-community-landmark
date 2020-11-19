@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import { FirebaseReducer } from 'react-redux-firebase';
 import { logout } from '../../store/actions/authActions';
-import { getAllNotes } from '../../store/actions/noteAction';
+import { getAllNotes } from '../../store/actions/noteActions';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';

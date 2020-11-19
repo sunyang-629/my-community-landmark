@@ -1,6 +1,7 @@
-import { Reducer, combineReducers } from 'redux';
-import { locationReducer, locationState } from './locationReducer';
-import { noteReducer, note } from './noteReducer';
+import { combineReducers } from 'redux';
+
+import { locationReducer } from './locationReducer';
+import { noteReducer } from './noteReducer';
 import { authReducer } from './authReducer';
 import { firestoreReducer } from 'redux-firestore';
 import { firebaseReducer } from 'react-redux-firebase';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 
-import { createNote, NoteState } from '../../store/actions/noteAction';
+import { createNote, NoteState } from '../../store/actions/noteActions';
 import { RootState } from '../../store/reducers/rootReducer';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';

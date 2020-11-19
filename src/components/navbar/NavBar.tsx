@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { RootState } from '../../store/reducers/rootReducer';
-import { getCurrentLocation } from '../../store/actions/locationAction';
-import { getAllNotes } from '../../store/actions/noteAction';
+import { getCurrentLocation } from '../../store/actions/locationActions';
+import { getAllNotes } from '../../store/actions/noteActions';
 
 import { SignedInLinks, SignedInMenuItems } from './SignedInLinks';
 import { SignedOutLinks, SignedOutMenuItems } from './SignedOutLinks';
@@ -19,8 +19,6 @@ import Menu from '@material-ui/core/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 
-
-//
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

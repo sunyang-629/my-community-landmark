@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../store/reducers/rootReducer';
-import { getAllNotes, searchNotesByUser,searchNotesByContent,searchLoginNotes } from '../../store/actions/noteAction';
+import { getAllNotes, searchNotesByUser,searchNotesByContent,searchLoginNotes } from '../../store/actions/noteActions';
 
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
