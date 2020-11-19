@@ -36,11 +36,11 @@ export type LocationAction = GetCurrentLocation | GetCurrentLocationError
 
 export interface CreateNote {
   type: ActionTypes.createNote,
-  payload:{ note:NoteState,isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean}
+  payload: { note: NoteState, isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean }
 }
 export interface CreateNoteError {
   type: ActionTypes.createNoteError,
-  payload:{err:string, isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean}
+  payload: { err: string, isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean }
 }
 
 export interface SearchNotesByUser {
@@ -81,7 +81,7 @@ export interface LoginSuccess {
 
 export interface LoginError {
   type: ActionTypes.loginError,
-  payload:{err:string}
+  payload: { err: string }
 }
 
 export type LoginAction = LoginSuccess | LoginError;
