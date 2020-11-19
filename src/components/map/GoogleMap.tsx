@@ -1,14 +1,10 @@
-import React,{useEffect} from 'react';
-import GoogleMapReact from 'google-map-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers/rootReducer';
-import { getCurrentLocation } from '../../store/actions/locationAction';
-import { firestoreConnect } from 'react-redux-firebase';
-// import { rootReducer } from '../../store/reducers/rootReducer';
-import { note } from '../../store/reducers/noteReducer';
+import React from 'react';
 import { compose } from 'redux';
-import { connect } from 'react-redux'
+import GoogleMapReact from 'google-map-react';
+import { connect, useSelector } from 'react-redux';
 
+import { RootState } from '../../store/reducers/rootReducer';
+import { firestoreConnect } from 'react-redux-firebase';
 
 import CurrentIcon from './CurrentIcon';
 import NoteIcon from '../notes/NoteIcon';
@@ -38,10 +34,12 @@ const MyGoogleMap = ({notes}:any) => {
     zoom: 15
   }
 
+  console.log(process.env);
+
   return (
     <div style={{ height: '90vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU' }}
+        bootstrapURLKeys={{ key: 'AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU' && process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={defaultMapSetting.center}
         defaultZoom={defaultMapSetting.zoom}
         center={location}
