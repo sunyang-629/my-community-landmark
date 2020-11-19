@@ -1,18 +1,18 @@
 import { ActionTypes, LoginAction, LogoutAction, SignUpAction } from './actionTypes';
 import { Dispatch } from "redux";
 
-export type loginState = {
+export type LoginState = {
   email: string,
   password: string,
 }
 
-type SignUpState = {
+export type RegisterState = {
   email: string,
   password: string,
   userName: string,
 }
 
-export const login = (credentials: loginState) => (dispatch: Dispatch<LoginAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
+export const login = (credentials: LoginState) => (dispatch: Dispatch<LoginAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firebase = getFirebase();
   firebase.auth().signInWithEmailAndPassword(
     credentials.email,
@@ -32,7 +32,7 @@ export const logout = () => (dispatch: Dispatch<LogoutAction>, getState: Functio
   })
 }
 
-export const register = (newUser:SignUpState) => (dispatch: Dispatch<SignUpAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
+export const register = (newUser: RegisterState) => (dispatch: Dispatch<SignUpAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
 

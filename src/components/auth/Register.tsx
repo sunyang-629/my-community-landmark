@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { RootState } from '../../store/reducers/rootReducer'; 
-import { register } from '../../store/actions/authActions';
+import { register, RegisterState } from '../../store/actions/authActions';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -40,14 +40,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Register = () => {
   
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<RegisterState>({
     email: '',
     password: '',
     userName: '',
   });
 
   const classes = useStyles();
-
   const dispatch = useDispatch();
   
    // @ts-ignore: Unreachable code error

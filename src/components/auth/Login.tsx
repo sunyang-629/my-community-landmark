@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom'; 
 
-import { login, loginState } from '../../store/actions/authActions';
+import { login, LoginState } from '../../store/actions/authActions';
 import { RootState } from '../../store/reducers/rootReducer';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Login = () => {
   
-  const [user, setUser] = useState<loginState>({ email: '', password: '' });
+  const [user, setUser] = useState<LoginState>({ email: '', password: '' });
   const classes = useStyles();
   const dispatch = useDispatch();
 
