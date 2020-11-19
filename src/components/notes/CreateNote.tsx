@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// import { createProject } from '../../store/actions/projectActions';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { createNote } from '../../store/actions/noteAction';
 import { RootState } from '../../store/reducers/rootReducer';
 import { RouteComponentProps, Redirect } from 'react-router-dom'
@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const CreateNote = (props: RouteComponentProps) => {
   
   const classes = useStyles();
+  const dispatch = useDispatch();
   
   const location = useSelector((state: RootState) => state.location);
   // @ts-ignore: Unreachable code error
@@ -59,8 +60,6 @@ const CreateNote = (props: RouteComponentProps) => {
 
   const currentLocationString = location.lat + ' ' + location.lng
 
-  const dispatch = useDispatch();
-
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     e.target && setNote({ ...note, [e.target.id]: e.target.value });
   }
@@ -70,6 +69,7 @@ const CreateNote = (props: RouteComponentProps) => {
     dispatch(createNote(note));
     props.history.push('/');
   }
+  
   if (!auth.uid) {
     return <Redirect to="/signin" />
   } else {
