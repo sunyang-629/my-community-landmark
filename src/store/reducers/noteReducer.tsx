@@ -37,7 +37,6 @@ export const noteReducer = (state = initState, action: NoteAction) => {
         isMyNotes: action.payload.isMyNotes,
       }
     case ActionTypes.searchNotesByUser:
-      console.log('action.pay:',action);
       return {
         ...state,
         isSearching: action.payload.isSearching,
@@ -46,7 +45,6 @@ export const noteReducer = (state = initState, action: NoteAction) => {
         isMyNotes: action.payload.isMyNotes,
       }
     case ActionTypes.searchNotesByContent:
-      console.log('action.pay:',action);
       return {
         ...state,
         isSearching: action.payload.isSearching,

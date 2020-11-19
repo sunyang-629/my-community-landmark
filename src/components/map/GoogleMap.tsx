@@ -34,8 +34,6 @@ const MyGoogleMap = ({notes}:any) => {
     zoom: 15
   }
 
-  console.log(process.env);
-
   return (
     <div style={{ height: '90vh', width: '100%' }}>
       <GoogleMapReact
@@ -55,7 +53,6 @@ const MyGoogleMap = ({notes}:any) => {
 
 export default compose(
   connect((state: RootState) => {
-    console.log('state:',state);
     return ({
       notes: state.firestore.ordered.notes,
   })}),
