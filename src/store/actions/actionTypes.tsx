@@ -1,3 +1,4 @@
+import { NoteState } from './noteAction';
 
 export enum ActionTypes  {
   getCurrentLocation = 'GET_CURRENT_LOCATION',
@@ -33,18 +34,9 @@ export interface GetCurrentLocationError {
 
 export type LocationAction = GetCurrentLocation | GetCurrentLocationError
 
-export interface note {
-  id?: string,
-  note: string,
-  author: string,
-  location: {
-    lat: number,
-    lng: number
-  }
-}
 export interface CreateNote {
   type: ActionTypes.createNote,
-  payload:{ note:note,isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean}
+  payload:{ note:NoteState,isSearching: boolean, isLoading: boolean, searchString: string, isMyNotes: boolean}
 }
 export interface CreateNoteError {
   type: ActionTypes.createNoteError,

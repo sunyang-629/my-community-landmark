@@ -1,18 +1,20 @@
-import { ActionTypes, NoteAction, note } from './actionTypes';
+import { ActionTypes, NoteAction } from './actionTypes';
 import { Dispatch } from "redux";
 import "firebase/database";
 import firebase from 'firebase/app';
 import "firebase/firestore";
 
-// type createNoteAction = {
-//   readonly type: ActionTypes.createNote,
-//   readonly payload: {
-//     lat: number,
-//     lng: number
-//   }
-// }
+export type NoteState = {
+  id?: string,
+  note: string,
+  author: string,
+  location: {
+    lat: number,
+    lng: number
+  }
+}
 
-export const createNote = (note:note) => (dispatch:Dispatch<NoteAction>,getState:Function,{ getFirebase, getFirestore }:{getFirebase:Function,getFirestore:Function}) => {
+export const createNote = (note:NoteState) => (dispatch:Dispatch<NoteAction>,getState:Function,{ getFirebase, getFirestore }:{getFirebase:Function,getFirestore:Function}) => {
   //
   const firestore = getFirestore();
   firestore.add({

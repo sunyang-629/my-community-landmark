@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { createNote } from '../../store/actions/noteAction';
-import { RootState } from '../../store/reducers/rootReducer';
 import { RouteComponentProps, Redirect } from 'react-router-dom'
+
+import { createNote, NoteState } from '../../store/actions/noteAction';
+import { RootState } from '../../store/reducers/rootReducer';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -49,7 +49,7 @@ const CreateNote = (props: RouteComponentProps) => {
   // @ts-ignore: Unreachable code error
   const auth = useSelector((state: RootState) => state.firebase.auth);
 
-  const [note, setNote] = useState({
+  const [note, setNote] = useState<NoteState>({
     note: '',
     location: {
       lat: location.lat,
