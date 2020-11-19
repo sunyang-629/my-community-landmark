@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { RootState } from '../../store/reducers/rootReducer'; 
-import { signUp } from '../../store/actions/authActions';
+import { register } from '../../store/actions/authActions';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const SignUp = () => {
+const Register = () => {
   
   const [user, setUser] = useState({
     email: '',
@@ -49,10 +49,8 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
   
- // @ts-ignore: Unreachable code error
-  const auth = useSelector(state => state.firebase.auth);
    // @ts-ignore: Unreachable code error
-  const authError = useSelector((state: RootState) => state.auth.authError);
+  const auth = useSelector((state: RootState) => state.firebase.auth);
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.id]: e.target.value });
@@ -60,7 +58,7 @@ const SignUp = () => {
 
   const handleSubmit = (e:React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    dispatch(signUp(user));
+    dispatch(register(user));
   }
 
   if (auth.uid) {
@@ -108,4 +106,4 @@ const SignUp = () => {
   }
 }
 
-export default SignUp
+export default Register

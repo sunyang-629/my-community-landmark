@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { signIn } from '../../store/actions/authActions';
+import { login } from '../../store/actions/authActions';
 import { RootState } from '../../store/reducers/rootReducer';
 import { Redirect } from 'react-router-dom'; 
 
@@ -55,7 +55,7 @@ const Login = () => {
 
   const handleSubmit = async (e:React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    dispatch(signIn(user));
+    dispatch(login(user));
   };
 
   if (auth.uid) {
@@ -88,8 +88,6 @@ const Login = () => {
           />
         {authError ? <Typography color="secondary" variant="subtitle1" gutterBottom>{ authError }</Typography> : null}
         <Button variant="outlined"  className={classes.button} type="submit" >Login</Button>
-        {/* {authError ? <Typography variant="subtitle1" gutterBottom>{ authError }</Typography> : null} */}
-              {/* {authError ? <p>{authError}</p> : null} */}
         </form>
    
     )
