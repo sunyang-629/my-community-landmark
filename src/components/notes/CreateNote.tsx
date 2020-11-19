@@ -69,9 +69,9 @@ const CreateNote = (props: RouteComponentProps) => {
     dispatch(createNote(note));
     props.history.push('/');
   }
-  
+
   if (!auth.uid) {
-    return <Redirect to="/signin" />
+    return <Redirect to="/login" />
   } else {
     return (
       <form className={classes.root} onSubmit={handleSubmit}>

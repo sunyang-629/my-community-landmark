@@ -34,7 +34,7 @@ export const SignedOutLinks = () => {
   return (
     <div>
       <Button variant="contained" color="primary" component="p" className={classes.button}><NavLink to='/register' className={classes.navLink} >Register</NavLink></Button>
-      <Button variant="contained" color="primary" component="p" className={classes.button}><NavLink to='/signin' className={classes.navLink} >Login</NavLink></Button>
+      <Button variant="contained" color="primary" component="p" className={classes.button}><NavLink to='/login' className={classes.navLink} >Login</NavLink></Button>
     </div>
 
   )
@@ -49,7 +49,7 @@ export const SignedOutMenuItems = () => {
         <Button variant="contained" component="p" className={classes.itemButton}><NavLink to='/register' className={classes.itemNavLink} >Register</NavLink></Button>
       </MenuItem>
       <MenuItem>
-        <Button variant="contained" component="p" className={classes.itemButton}><NavLink to='/signin' className={classes.itemNavLink} >Login</NavLink></Button>
+        <Button variant="contained" component="p" className={classes.itemButton}><NavLink to='/login' className={classes.itemNavLink} >Login</NavLink></Button>
       </MenuItem>
     </div>
   )
