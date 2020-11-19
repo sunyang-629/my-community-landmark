@@ -14,19 +14,20 @@ export type RegisterState = {
 
 export const login = (credentials: LoginState) => (dispatch: Dispatch<LoginAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firebase = getFirebase();
+  
   firebase.auth().signInWithEmailAndPassword(
     credentials.email,
     credentials.password
   ).then(() => {
     dispatch({ type: ActionTypes.loginSuccess, payload: { err: '' } });
   }).catch((err) => {
-    console.log('error',err);
     dispatch({ type: ActionTypes.loginError, payload: { err:err.message } });
   })
 };
 
 export const logout = () => (dispatch: Dispatch<LogoutAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firebase = getFirebase();
+
   firebase.auth().signOut().then(() => {
     dispatch({ type: ActionTypes.logoutSuccess, payload: { err: '' } });
   })
