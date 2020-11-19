@@ -1,81 +1,72 @@
-# The Movie DB App
+# My Community Landmark App
 
-The aim of this project is to build an app browsing movie information through [The Movie DB API](https://www.themoviedb.org/documentation/api).
+The aim of this project is to build an app allowing users to save location based notes on a map.
 
-This project is deployed [here](https://joey-tmdb-react.herokuapp.com/).
+This project is deployed [here](https://yansen-mario-plan.web.app/).
 
 ## Functionality
 This is a web application containing the following main features:
-- Users can browse popular movies
-- Users can search movies by keywords
-- Users can navigate to movie details page by clicking on the movie poster
+- Users can see their current location on a map
+- Users can save a short note at their current loaction
+- Users can see notes that are save by both themselves and any other users
+- Users can check notes' details including text, location and author
+- Users can search notes by author or text
 
 ## Technology
-- Code: `React (16.8.6), Redux (4.0.1), react-router-dom(5.0.0), Typescript(3.4.3), date-fns, cross-fetch`
-- Server: `Express`
+- Code: `React (17.0.1), Redux (4.0.5), react-router-dom(5.2.0), Typescript(3.7.5), redux-thunk(2.3.0), react-redux-firebase(3.7.0), redux-firestore(0.14.0)`
+- Server: `firebase(8.0.2)`
+- DataBase: `firestore`
+- Map: `google-map-react`
 - Styling: `styled-components`
 - UI component library: `Semantic UI React`
-- Linting: `TSlint`
-- Testing: `Jest`
-- Build: `Webpack(4.30.0)`
-- Deployment: `Heroku`
+- Deployment: `GOOGLE-firebase`
 
 ## Development
-This project is using `yarn` for dependency management.  Make sure `yarn` is installed on your machine.
+This project is using `npm` for dependency management.  Make sure `npm` is installed on your machine.
 
-- `yarn install` 
+- `npm install` 
 
 Install project dependencies.
 
-- `API_KEY={your_api_key} yarn start`
+- `npm start`
 
 Run the app in development mode on `http://localhost:3000/`.
 
-- `yarn lint`
-
-Run TSlint on the project.
-
-- `yarn test`
-
-Lint the project and run all the tests.
-
-- `yarn build`
+- `npm run build`
 
 Build the app for production.
 
 ## APIs
-This project is based on The Movie DB API available at https://www.themoviedb.org/documentation/api. This API uses API key which is injected by environment variable in server side. All front end API calls are passed to the node server to append the API key and are forwarded to the TMDB API endpoints, which prevent end users from accessing the key. 
+This project is based on The GOOGLE MAP available at google-map-react. This package written over a small set of the Google Maps API. It allows you to render any React component on the Google Map.it can render map components in the browser even if the Google Maps API is not loaded.
 
 
-## Considerations
-I only connect page-level components and the searchBar component to the store, while keeping most other components stateless. In this way, most of the components in this app are only responsible for rendering UI, thus the data flow is easy to reason about and manage. 
+## How to use
 
-Pure components and memorised functional components are used as much as possible to reduce unnecessary re-rendering.
+As a new User, you might find that you're located in the center of Brisbane city which is not your current position obviously afer open this app in your browser. You can click the person-pin-icon-button at the top left to make you relocated to get your current location. Essentially, you don't need to do it at second time on the same device, your last location will be stored in localStorage if you don't clear it manually.
 
-The search feature will be triggered by typing or hitting Enter to provide a smooth experience. The API calls are debounced in order to provider better user experience and reduce burden on the backend.
+As a visitor with registering or logging in, you can't see any notes on the map expect your current location icon.
 
-I choose infinite scrolling over pagination as it provides natural user experience for mobile users(as of 2018 over half of the web users are on mobile devices).
+You can register in the app with any email, there'll not a verification for your email address.
 
-Some results coming back from the API have null value in some fields, which need to be handled properly.
+After you login, you'll find all notes posted on the map. but your notes are distinguished with other users' notes by a 'primary' color. If you want to see the detail of any note. you can click it's icon shown on the map. The Upper Case letter in every note's icon stands for the first letter of it's author.
 
-`!important` is used in some places as I don't want to couple the css rules with the implementation of the UI library. 
+You can create a new note at your current location by clicking 'NEW NOTE' at navbar. I've set input string limited to 30 letters. The /create link is protected, a user without logging in will be redirected to /login page.
+
+You can search relative notes through putting text in search bar, clicking icon on the right of input area will allows you to switch search type to by username or to by content. If you need that only notes created by you are shown on the map, you can toggle the switch to active in search bar. All the result of your search will be displayed underneath the search bar.
+note: Due to technical limitations on firebase, Fuzzy Search is not supported at this moment.
 
 ## Future Improvement
 
-- The background of the header on home page is using background image and is not exactly the same as the mock due to the time limit. CSS could be used to produce the background and improve the performance.  
+- The style of form is using simple design due to the time limit, some CSS stylings should be improved. 
 
-- The handling of failed to load images could be improved(e.g. by using `onerror` attribute).
+- Fuzzy Search should be implemented while searching for notes.
 
 - Search history feature could be provided.
 
-- Error occurred during data fetching could be handled more elegantly. Currently the app only provides limited error handling (showing a simple error message)
+- Avator for each user should replace the simple icon with first letter of username on the map.
 
-- Mobile UI design could be improved. Currently some movies with extra long title may cause unbalanced layout.
+- Auth could be improved. Currently different users can have the same username, and password confirmation is unavailable.
 
-- Different image size could be used for different devices to maximise the performance.
+- Method of displaying note's detail on the map could be improved to maximise the performance.
 
-- API endpoints could be restricted to the same domain to prevent abusing.
-
-- Building process could be improved by bundling third party libraries apart from main application code so that the third party library code could be cached longer.
-
-- More unit tests could be added for actions, reducers and components. Currently only some utility functions are tested due to time limit.
+- Tests could be added for actions, reducers and components. 
