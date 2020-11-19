@@ -39,7 +39,6 @@ const NoteIcon = (props: any) => {
     <ClickAwayListener onClickAway={()=>{setIsShown(false)}}>
       <div>
         <IconButton aria-label="show note details" style={{cursor: 'cursor'}} onClick={()=>{setIsShown(true)}} >
-          {/* <SpeakerNotesIcon color={color} /> */}
           <Avatar alt={props.author.toUpperCase()} src="/broken-image.jpg" className={classes.avatar} style={{background:avatarColor}} onClick={()=>{setIsShown(true)}} />
         </IconButton>
         {isShown && <Card className={classes.root} variant="outlined" style={{background:contentColor}}>

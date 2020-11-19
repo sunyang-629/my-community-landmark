@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { FirebaseReducer } from 'react-redux-firebase';
-import { signOut } from '../../store/actions/authActions';
+import { logout } from '../../store/actions/authActions';
 import { getAllNotes } from '../../store/actions/noteAction';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -53,7 +53,7 @@ export const SignedInLinks = (props:{profile:FirebaseReducer.Profile<Record<stri
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(signOut());
+    dispatch(logout());
   }
 
   const handleClearSearch = () => {
@@ -75,7 +75,7 @@ export const SignedInMenuItems = () => {
   const classes = useStyles();
 
   const handleClick = () => {
-    dispatch(signOut());
+    dispatch(logout());
   }
   
   const handleClearSearch = () => {

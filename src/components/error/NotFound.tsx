@@ -1,20 +1,14 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/actions/authActions';
-import { RootState } from '../../store/reducers/rootReducer';
-import { Redirect } from 'react-router-dom'; 
+import React from 'react'
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    h3: {
+    warningTitle: {
       marginLeft:'auto',
       marginRight:'auto',
-      paddingTop: theme.spacing(5),
+      paddingTop: theme.spacing(7),
       color: 'white',
       width: '80%'
     },
@@ -27,7 +21,7 @@ const NotFound = () => {
 
     return (
     <div>
-      <Typography className={classes.h3} variant="h3" gutterBottom>
+      <Typography className={classes.warningTitle} variant="h3" gutterBottom>
         We tried to locate the page you were looking for and couldn't find it!
       </Typography>
     </div>

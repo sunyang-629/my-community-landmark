@@ -25,7 +25,7 @@ export const login = (credentials: loginState) => (dispatch: Dispatch<LoginActio
   })
 };
 
-export const signOut = () => (dispatch: Dispatch<LogoutAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
+export const logout = () => (dispatch: Dispatch<LogoutAction>, getState: Function, { getFirebase, getFirestore }: { getFirebase: Function, getFirestore: Function }) => {
   const firebase = getFirebase();
   firebase.auth().signOut().then(() => {
     dispatch({ type: ActionTypes.logoutSuccess, payload: { err: '' } });
