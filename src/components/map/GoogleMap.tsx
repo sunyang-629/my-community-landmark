@@ -45,7 +45,7 @@ const MyGoogleMap = ({notes}:any) => {
   return (
     <div style={{ height: '90vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAjR3MxQwnBjdzcORF0tEy9OTwsxOz-p0Y" }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={defaultMapSetting.center}
         defaultZoom={defaultMapSetting.zoom}
         center={location}
