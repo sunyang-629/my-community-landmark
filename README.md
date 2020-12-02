@@ -1,44 +1,72 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My Community Landmark App
 
-## Available Scripts
+The aim of this project is to build an app allowing users to save location based notes on a map.
 
-In the project directory, you can run:
+This project is deployed [here](https://yansen-mario-plan.web.app/).
 
-### `npm start`
+## Functionality
+This is a web application containing the following main features:
+- Users can see their current location on a map
+- Users can save a short note at their current loaction
+- Users can see notes that are save by both themselves and any other users
+- Users can check notes' details including text, location and author
+- Users can search notes by author or text
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technology
+- Code: `React (17.0.1), Redux (4.0.5), react-router-dom(5.2.0), Typescript(3.7.5), redux-thunk(2.3.0), react-redux-firebase(3.7.0), redux-firestore(0.14.0)`
+- Server: `firebase(8.0.2)`
+- DataBase: `firestore`
+- Map: `google-map-react`
+- Styling: `styled-components`
+- UI component library: `Semantic UI React`
+- Deployment: `GOOGLE-firebase`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Development
+This project is using `npm` for dependency management.  Make sure `npm` is installed on your machine.
 
-### `npm test`
+- `npm install` 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install project dependencies.
 
-### `npm run build`
+- `npm start`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Run the app in development mode on `http://localhost:3000/`.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- `npm run build`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Build the app for production.
 
-### `npm run eject`
+## APIs
+This project is based on The GOOGLE MAP available at google-map-react. This package written over a small set of the Google Maps API. It allows you to render any React component on the Google Map.it can render map components in the browser even if the Google Maps API is not loaded.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How to use
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+As a new User, you might find that you're located in the center of Brisbane city which is not your current position obviously afer open this app in your browser. You can click the person-pin-icon-button at the top left to make you relocated to get your current location. Essentially, you don't need to do it at second time on the same device, your last location will be stored in localStorage if you don't clear it manually.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+As a visitor with registering or logging in, you can't see any notes on the map expect your current location icon.
 
-## Learn More
+You can register in the app with any email, there'll not a verification for your email address.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+After you login, you'll find all notes posted on the map. but your notes are distinguished with other users' notes by a 'primary' color. If you want to see the detail of any note. you can click it's icon shown on the map. The Upper Case letter in every note's icon stands for the first letter of it's author.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can create a new note at your current location by clicking 'NEW NOTE' at navbar. I've set input string limited to 30 letters. The /create link is protected, a user without logging in will be redirected to /login page.
+
+You can search relative notes through putting text in search bar, clicking icon on the right of input area will allows you to switch search type to by username or to by content. If you need that only notes created by you are shown on the map, you can toggle the switch to active in search bar. All the result of your search will be displayed underneath the search bar.
+note: Due to technical limitations on firebase, Fuzzy Search is not supported at this moment.
+
+## Future Improvement
+
+- The style of form is using simple design due to the time limit, some CSS stylings should be improved. 
+
+- Fuzzy Search should be implemented while searching for notes.
+
+- Search history feature could be provided.
+
+- Avator for each user should replace the simple icon with first letter of username on the map.
+
+- Auth could be improved. Currently different users can have the same username, and password confirmation is unavailable.
+
+- Method of displaying note's detail on the map could be improved to maximise the performance.
+
+- Tests could be added for actions, reducers and components. 
